@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+    <children>
+        <Pane cache="true" prefHeight="100.0" prefWidth="700.0" style="-fx-background-color: #96846d;">
+            <children>
+                <ComboBox layoutX="484.0" layoutY="69.0" prefWidth="150.0" promptText="Wybierz miasto" style="-fx-background-color: #c1b4a2;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Krakow" />
+                            <String fx:value="Warszawa" />
+                            <String fx:value="Kielce" />
+                        </FXCollections>
+                    </items>
+
+                </ComboBox>
+                <DatePicker layoutX="298.0" layoutY="69.0" promptText="Data konferencji" style="-fx-background-color: #c1b4a2;" />
+                <Button layoutX="641.0" layoutY="69.0" mnemonicParsing="false" style="-fx-background-color: #c1b4a2;" text="Szukaj" />
+                <Label layoutX="52.0" layoutY="14.0" opacity="0.99" prefHeight="59.0" prefWidth="298.0" text="KONFERENCJE" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
+                    <font>
+                        <Font name="Rockwell Bold" size="33.0" />
+                    </font>
+                    <effect>
+                        <Glow />
+                    </effect>
+                </Label>
+                <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="472.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/Login.png" />
+                    </image>
+                </ImageView>
+                <Button fx:id="zalogujSie" layoutX="497.0" layoutY="2.0" mnemonicParsing="false" onAction="#onClickZaloguj" prefHeight="22.0" prefWidth="76.0" style="-fx-background-color: #96846d;" text="Zaloguj się">
+                    <font>
+                        <Font name="SansSerif Regular" size="12.0" />
+                    </font>
+                </Button>
+                <Button fx:id="zapiszSie" onAction="#onClickZapisz" cache="true" depthTest="ENABLE" layoutX="600.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="82.0" style="-fx-background-color: #96846d;" text="Zapisz się">
+                    <font>
+                        <Font name="Serif Regular" size="12.0" />
+                    </font>
+                </Button>
+                <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="586.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/registration.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="32.0" fitWidth="68.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/home1.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+        <ScrollPane layoutX="-1.0" layoutY="105.0" prefHeight="500.0" prefWidth="700.0">
+            <content>
+                <AnchorPane prefHeight="500.0" prefWidth="700.0">
+                    <children>
+                        <Pane cache="true" layoutX="31.0" layoutY="14.0" prefHeight="179.0" prefWidth="197.0" style="-fx-background-color: #c5cbd6;">
+                            <children>
+                                <ImageView fitHeight="40.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                <Label layoutX="2.0" layoutY="90.0" prefHeight="88.0" prefWidth="206.0" text="Organizator: Centrum Języka&#10; i Kultury Rosyjskiej Uniwersytetu &#10;Marii Curie-Skłodowskiej w Lublinie; &#10;Instytut Filologii Słowiańskiej UMCS&#10;">
+                                    <font>
+                                        <Font name="System Italic" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="7.0" layoutY="6.0" prefHeight="59.0" prefWidth="196.0" text="Języki słowiańskie na &#10;neofilologiach&#10;i innych kierunkach studiów">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <effect>
+                                <SepiaTone />
+                            </effect>
+                        </Pane>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="SW_RESIZE" />
+                    </cursor>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
