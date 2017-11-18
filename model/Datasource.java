@@ -7,7 +7,7 @@ import java.sql.*;
  */
 public class Datasource {
     public static final String DB_NAME = "konferencje.db";
-    public static final String CONNECTION_STRING = "jdbc:sqlite:D:\\intelliJ\\workspace\\KonferencjeApp\\src\\db\\" + DB_NAME;
+    public static final String CONNECTION_STRING = "jdbc:sqlite:D:\\ConferenceSystem\\db\\" + DB_NAME;
 
     private Connection conn;
 
