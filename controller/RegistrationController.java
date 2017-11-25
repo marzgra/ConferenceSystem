@@ -62,7 +62,7 @@ System.out.println("SZlak mnie trafi");
     }
 
     public void onclickStronaGlowna(){
-        
+
 
 //        AnchorPane pane= null;
 //        try {
