@@ -8,13 +8,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 
 
 import controller.MainController;
-
+import model.Server;
 
 
 public class Main extends Application {
@@ -26,9 +27,11 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Homepage.fxml"));
             Parent parent = loader.load();
             //Scene scene = new Scene(parent);
+            //stage.getIcons().add(new Image(this.getClass().getResource("login.png").toString()));
             primaryStage.setTitle("System wspomagający organizacje konferencji");
             primaryStage.setScene(new Scene(parent, 900,600));
             primaryStage.show();
+            //  primaryStage.getIcons().add(this.getClass().getResource("login.png").toString()));
             //primaryStage.setResizable(false);
 
             primaryStage.setOnCloseRequest((WindowEvent we) -> {
@@ -58,6 +61,22 @@ public class Main extends Application {
 
     }
 
+    //    @Override
+    public void init() throws Exception {
+//        super.init();
+//
+        Server.getInstance().open();
+        //{
+//            System.out.println("FATAL ERROR: Couldn't connect to database");
+//            Platform.exit();
+//        }
+    }
+    //
+//    @Override
+//    public void stop() throws Exception {
+//        super.stop();
+//        Server.getInstance().close();
+//    }
     public static void main(String[] args) {
         launch(args);
     }

@@ -154,7 +154,6 @@ public class Server {
             System.out.println("nie dodano uĹĽytkownika: " + e.getMessage());
         }
 
-
     }
 
     public int checkLoginPass(String login, String haslo) {

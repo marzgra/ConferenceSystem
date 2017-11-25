@@ -17,30 +17,6 @@ public class HomepageUPController {
     @FXML
     private Button mojeKonto;
 
-    @FXML
-    public void onClickZaloguj(ActionEvent event)
-    {
-        AnchorPane pane= null;
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/view/LogIn.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        rootPane.getChildren().setAll(pane);
-
-    }
-    @FXML
-    public void onClickZapisz(ActionEvent event)
-    {
-        AnchorPane pane= null;
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/view/Registration.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        rootPane.getChildren().setAll(pane);
-
-    }
 
     public void onClickWyloguj(ActionEvent actionEvent) {
         AnchorPane pane= null;

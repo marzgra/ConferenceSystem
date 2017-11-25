@@ -50,7 +50,8 @@ public class RegistrationController implements Initializable {
 
     public void przeslij(ActionEvent actionEvent) {
 
-
+System.out.println("SZlak mnie trafi");
+System.out.println("SZlak mnie trafi");
         try {
             Server.getInstance().insertUser(login.getText(), password.getText(),name.getText(), surname.getText(), email.getText(), country.getText(),PRELEGENT);
         } catch (SQLException e) {
@@ -61,15 +62,16 @@ public class RegistrationController implements Initializable {
     }
 
     public void onclickStronaGlowna(){
+        
 
-        AnchorPane pane= null;
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/view/Homepage.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        pane1.getChildren().setAll(pane);
-
+//        AnchorPane pane= null;
+//        try {
+//            pane = FXMLLoader.load(getClass().getResource("/view/Homepage.fxml"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        pane1.getChildren().setAll(pane);
+//
 
 
 
