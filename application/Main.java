@@ -23,11 +23,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/panelG.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Homepage.fxml"));
             Parent parent = loader.load();
             //Scene scene = new Scene(parent);
             primaryStage.setTitle("System wspomagający organizacje konferencji");
-            primaryStage.setScene(new Scene(parent, 700,400));
+            primaryStage.setScene(new Scene(parent, 900,600));
             primaryStage.show();
             //primaryStage.setResizable(false);
 

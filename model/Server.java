@@ -1,6 +1,12 @@
 package model;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.io.IOException;
 import java.sql.*;
+import java.util.Optional;
 
 public class Server {
 
@@ -145,11 +151,35 @@ public class Server {
             System.out.println("Uzytkownik dodany.");
 
         } catch (SQLException e) {
-            System.out.println("nie dodano użytkownika: " + e.getMessage());
+            System.out.println("nie dodano uĹĽytkownika: " + e.getMessage());
         }
 
 
     }
 
+    public int checkLoginPass(String login, String haslo) {
+
+
+        int znaleziono=2;
+
+        try(Statement stmt = connection.createStatement();
+            Statement stmt2 = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT LOGIN FROM UZYTKOWNIK");
+            ResultSet rs2 = stmt2.executeQuery("SELECT HASLO FROM UZYTKOWNIK")) {
+
+            while (rs.next()&&rs2.next()) {
+
+                if (login.equals(rs.getString(1)) && (haslo.equals(rs2.getString(1)))) {
+                    znaleziono = 1;
+                }
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return znaleziono;
+    }
 
 }
+

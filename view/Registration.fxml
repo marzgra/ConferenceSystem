@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -10,69 +12,84 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #96846d;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrationController">
-   <children>
-      <Label layoutX="123.0" layoutY="19.0" prefHeight="59.0" prefWidth="273.0" text="REJSTRACJA" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="41.0" />
-         </font>
-      </Label>
-      <Label layoutX="95.0" layoutY="94.0" text="Imie">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="73.0" layoutY="132.0" prefHeight="27.0" prefWidth="78.0" text="Nazwisko">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="86.0" layoutY="213.0" text="e-mail">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="90.0" layoutY="248.0" prefHeight="27.0" prefWidth="66.0" text="Login">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="88.0" layoutY="287.0" text="Hasło">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="name" layoutX="195.0" layoutY="95.0" style="-fx-background-color: #c1b4a2;" />
-      <TextField layoutX="195.0" layoutY="133.0" style="-fx-background-color: #c1b4a2;" />
-      <TextField layoutX="195.0" layoutY="175.0" style="-fx-background-color: #c1b4a2;" />
-      <TextField layoutX="195.0" layoutY="214.0" style="-fx-background-color: #c1b4a2;" />
-      <TextField layoutX="195.0" layoutY="249.0" style="-fx-background-color: #c1b4a2;" />
-      <Label layoutX="59.0" layoutY="174.0" prefHeight="27.0" prefWidth="105.0" text="Miejscowość">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="61.0" layoutY="323.0" prefHeight="27.0" prefWidth="124.0" text="Powtórz hasło">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <PasswordField layoutX="195.0" layoutY="288.0" style="-fx-background-color: #c1b4a2;" />
-      <PasswordField layoutX="195.0" layoutY="324.0" style="-fx-background-color: #c1b4a2;" />
-      <ChoiceBox layoutX="195.0" layoutY="361.0" prefWidth="150.0" style="-fx-background-color: #c1b4a2;"  />
-      <Label layoutX="57.0" layoutY="360.0" text="Typ użytkownika">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Button fx:id="przeslij" onAction="#przeslij" layoutX="487.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #c1b4a2;" text="Prześlij">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font></Button>
-      <ImageView fitHeight="280.0" fitWidth="300.0" layoutX="409.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/register.png" />
-         </image>
-      </ImageView>
-   </children>
+<AnchorPane maxHeight="600.0" maxWidth="900.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #96846d;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrationController">
+    <children>
+        <Label layoutX="75.0" layoutY="54.0" prefHeight="59.0" prefWidth="273.0" text="REJESTRACJA" textAlignment="CENTER">
+            <font>
+                <Font name="System Bold" size="41.0" />
+            </font>
+        </Label>
+        <Label layoutX="134.0" layoutY="175.0" text="Imię">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="112.0" layoutY="213.0" prefHeight="27.0" prefWidth="78.0" text="Nazwisko">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="125.0" layoutY="294.0" text="e-mail">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="129.0" layoutY="329.0" prefHeight="27.0" prefWidth="66.0" text="Login">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="127.0" layoutY="368.0" text="Hasło">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="name" layoutX="234.0" layoutY="176.0" style="-fx-background-color: #c1b4a2;" />
+        <TextField fx:id="surname" layoutX="234.0" layoutY="214.0" style="-fx-background-color: #c1b4a2;" />
+        <TextField fx:id="country" layoutX="234.0" layoutY="256.0" style="-fx-background-color: #c1b4a2;" />
+        <TextField fx:id="email" layoutX="234.0" layoutY="295.0" style="-fx-background-color: #c1b4a2;" />
+        <TextField fx:id="login" layoutX="234.0" layoutY="330.0" style="-fx-background-color: #c1b4a2;" />
+        <Label layoutX="98.0" layoutY="255.0" prefHeight="27.0" prefWidth="105.0" text="Miejscowość">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="100.0" layoutY="404.0" prefHeight="27.0" prefWidth="124.0" text="Powtórz hasło">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <PasswordField fx:id="password" layoutX="234.0" layoutY="369.0" style="-fx-background-color: #c1b4a2;" />
+        <PasswordField fx:id="password2" layoutX="234.0" layoutY="405.0" style="-fx-background-color: #c1b4a2;" />
+        <ChoiceBox fx:id="wybor" layoutX="234.0" layoutY="442.0" prefWidth="150.0" style="-fx-background-color: #c1b4a2;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="UCZESTNIK" />
+                    <String fx:value="PRELEGENT" />
+                    <String fx:value="ORGANIZATOR" />
+                </FXCollections>
+            </items>
+
+        </ChoiceBox>
+        <Label layoutX="96.0" layoutY="441.0" text="Typ użytkownika">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Button fx:id="przeslij" layoutX="616.0" layoutY="423.0" mnemonicParsing="false" onAction="#przeslij" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #c1b4a2;" text="Prześlij">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font></Button>
+        <ImageView fitHeight="362.0" fitWidth="441.0" layoutX="497.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/register.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="homeImg" fitHeight="34.0" fitWidth="52.0" layoutX="65.0" layoutY="532.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/home1.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="stronaGlowna" layoutX="107.0" layoutY="541.0" mnemonicParsing="false" onAction="#onclickStronaGlowna" style="-fx-background-color: #c1b4a2;" text="strona główna" />
+    </children>
 </AnchorPane>

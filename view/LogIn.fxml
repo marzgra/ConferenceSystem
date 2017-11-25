@@ -10,54 +10,54 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="loginPane" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #96846d;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogInController">
+<AnchorPane fx:id="loginPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #96846d;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogInController">
     <children>
-        <Pane layoutX="357.0" layoutY="7.0" prefHeight="386.0" prefWidth="329.0">
+        <Pane layoutX="450.0" prefHeight="600.0" prefWidth="450.0">
             <children>
-                <TextField layoutX="76.0" layoutY="137.0" prefHeight="34.0" prefWidth="176.0" promptText="login/email" style="-fx-background-color: #c1b4a2;" />
-                <Label layoutX="77.0" layoutY="76.0" prefHeight="46.0" prefWidth="176.0" text="Zaloguj się ">
+                <TextField fx:id="login1" layoutX="159.0" layoutY="188.0" prefHeight="34.0" prefWidth="176.0" promptText="login/email" style="-fx-background-color: #c1b4a2;" />
+                <Label layoutX="160.0" layoutY="127.0" prefHeight="46.0" prefWidth="176.0" text="Zaloguj się ">
                     <font>
                         <Font name="System Bold" size="31.0" />
                     </font>
                 </Label>
-                <PasswordField layoutX="76.0" layoutY="193.0" prefHeight="34.0" prefWidth="176.0" promptText="hasło" style="-fx-background-color: #c1b4a2;" />
-                <Button layoutX="101.0" layoutY="247.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #c1b4a2;" text="Zaloguj się ">
+                <PasswordField fx:id="haslo1" layoutX="159.0" layoutY="244.0" prefHeight="34.0" prefWidth="176.0" promptText="hasło" style="-fx-background-color: #c1b4a2;" />
+                <Button layoutX="184.0" layoutY="315.0" mnemonicParsing="false" onAction="#onclickZaloguj" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #c1b4a2;" text="Zaloguj się ">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-                <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="32.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="115.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/name.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="34.0" fitWidth="38.0" layoutX="30.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="34.0" fitWidth="38.0" layoutX="113.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/password.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="homeImg" fitHeight="34.0" fitWidth="52.0" layoutX="13.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="homeImg" fitHeight="34.0" fitWidth="52.0" layoutX="65.0" layoutY="532.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/home1.png" />
                     </image>
                 </ImageView>
-            <Button fx:id="stronaGlowna" layoutX="55.0" layoutY="335.0" mnemonicParsing="false" onAction="#onclickStronaGlowna" style="-fx-background-color: #c1b4a2;" text="strona główna" />
+                <Button fx:id="stronaGlowna" layoutX="107.0" layoutY="541.0" mnemonicParsing="false" onAction="#onclickStronaGlowna" style="-fx-background-color: #c1b4a2;" text="strona główna" />
             </children>
         </Pane>
-        <Pane prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #071b3a;">
+        <Pane prefHeight="600.0" prefWidth="450.0" style="-fx-background-color: #071b3a;">
             <children>
-                <ImageView fitHeight="255.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="369.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/women-networking-photo_utnYGl3.jpg.586x424_q85_crop.jpg" />
                     </image>
                 </ImageView>
-                <Label layoutX="7.0" layoutY="219.0" text="Witaj w systemie organzacji konferencji" textFill="#f8f6f6">
+                <Label layoutX="32.0" layoutY="242.0" prefHeight="116.0" prefWidth="404.0" text="Witaj w systemie organzacji konferencji" textFill="#f8f6f6">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
-                <Label layoutX="59.0" layoutY="262.0" text="Wszystko co potrzebujesz w jednym miejscu.&#10;Nie masz jeszcze konta?" textAlignment="CENTER" textFill="#f5f0f0" />
-                <Button fx:id="zapiszSie" layoutX="109.0" layoutY="316.0" mnemonicParsing="false" onAction="#onClickZapisz" prefHeight="27.0" prefWidth="110.0" style="-fx-background-color: #c1b4a2;" text="Zapisz się ">
+                <Label layoutX="107.0" layoutY="384.0" text="Wszystko co potrzebujesz w jednym miejscu.&#10;Nie masz jeszcze konta?" textAlignment="CENTER" textFill="#f5f0f0" />
+                <Button fx:id="zapiszSie" layoutX="163.0" layoutY="443.0" mnemonicParsing="false" onAction="#onClickZapisz" prefHeight="27.0" prefWidth="110.0" style="-fx-background-color: #c1b4a2;" text="Zapisz się ">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
