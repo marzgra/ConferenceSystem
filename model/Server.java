@@ -228,5 +228,4 @@ public class Server {
 
     //TODO edycja danych: miejscowosc, haslo, email
 
-
 }
