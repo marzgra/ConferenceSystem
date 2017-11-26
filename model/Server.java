@@ -23,7 +23,6 @@ public class Server {
     private static final String KOLUMNA_MIEJSCOWOSC = "MIEJSCOWOSC";
 
 
-
     private static final String NOWY_UZYTKOWNIK = "INSERT INTO " + TABELA_UZYTKOWNIK
             + "(ID_UZYTKOWNIK, LOGIN, HASLO, IMIE, NAZWISKO, EMAIL, MIEJSCOWOSC) VALUES"
             + "(?, ?, ?, ?, ?, ?, ?)";
@@ -46,6 +45,9 @@ public class Server {
     private static final String SPRAWDZ_HASLO = "SELECT " + KOLUMNA_HASLO + " FROM "
             + TABELA_UZYTKOWNIK + " WHERE " + KOLUMNA_LOGIN + " = ?";
 
+    private static final String POBIERZ_DANE = "SELECT * FROM "
+            + TABELA_UZYTKOWNIK + " WHERE " + KOLUMNA_LOGIN + " = ? ";
+
     private static final String USUN_UZYTKOWNIKA = "DELETE FROM " + TABELA_UZYTKOWNIK
             + " WHERE " + KOLUMNA_LOGIN + " = ?";
 
@@ -59,6 +61,8 @@ public class Server {
             + KOLUMNA_MIEJSCOWOSC + " = ? WHERE " + KOLUMNA_LOGIN + " = ?";
 
     private Connection connection;
+
+    private Uzytkownik user;
 
     /***
      * lazy initialization - instance of this class won't be created, until
@@ -172,7 +176,7 @@ public class Server {
 
     public boolean insertUser(String login, String haslo,
                               String imie, String nazwisko,
-                              String email, String miejscowosc, TypUzytkownika typ){
+                              String email, String miejscowosc, TypUzytkownika typ) {
 
         if (isLoginFree(login)) {
             try {
@@ -229,6 +233,22 @@ public class Server {
             resultSet.next();
             if (resultSet.getString(1).equals(haslo)) {
                 System.out.println("Logowanie: haslo poprawne");
+
+                statement = connection.prepareStatement(POBIERZ_DANE);
+                statement.setString(1, login);
+                resultSet = statement.executeQuery();
+                resultSet.next();
+
+                user = new Uzytkownik(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7)
+                );
+                System.out.println(user.toString());
                 return true;
             }
             System.out.println("Logowanie: niepoprawne hasło.");
@@ -239,11 +259,13 @@ public class Server {
         }
     }
 
-    //TODO usuwanie uztkownika z tabeli uzytkownik i tabeli uczestnik/prganizator/prelegent i powiazanych tabel wywolanie wyzwalacza
-    public void deleteUsesr(String login){
-        try{
+    /**
+     * delete user from table UZYTKOWNIK and other related tables (FK on delete cascade)
+     */
+    public void deleteUsesr() {
+        try {
             PreparedStatement statement = connection.prepareStatement(USUN_UZYTKOWNIKA);
-            statement.setString(1, login);
+            statement.setString(1, user.getLogin());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -251,38 +273,52 @@ public class Server {
         }
     }
 
-
-    public void modifyUserEmail(String login, String email) {
+    /**
+     * modify email
+     */
+    public void modifyUserEmail(String newEmail) {
+        user.setEmail(newEmail);
         try {
             PreparedStatement statement = connection.prepareStatement(ZMIEN_EMAIL);
-            statement.setString(1, email);
-            statement.setString(2, login);
+            statement.setString(1, newEmail);
+            statement.setString(2, user.getLogin());
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("modifyUserEmail error: " + e.getMessage());
         }
     }
 
-    public void modifyUserMiejscowosc(String login, String miejscowosc) {
+    /**
+     * modify city
+     */
+    public void modifyUserMiejscowosc(String newMiejscowosc) {
+        user.setMiejscowosc(newMiejscowosc);
         try {
             PreparedStatement statement = connection.prepareStatement(ZMIEN_MIEJSCOWOSC);
-            statement.setString(1, miejscowosc);
-            statement.setString(2, login);
+            statement.setString(1, newMiejscowosc);
+            statement.setString(2, user.getLogin());
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("modifyUserEmail error: " + e.getMessage());
+            System.out.println("modifyUserMiejscowosc error: " + e.getMessage());
         }
     }
 
-    public void modifyUserHaslo(String login, String haslo) {
+    /**
+     * modify password
+     */
+    public void modifyUserHaslo(String newHaslo) {
+        user.setHaslo(newHaslo);
         try {
             PreparedStatement statement = connection.prepareStatement(ZMIEN_HASLO);
-            statement.setString(1, haslo);
-            statement.setString(2, login);
+            statement.setString(1, newHaslo);
+            statement.setString(2, user.getLogin());
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("modifyUserEmail error: " + e.getMessage());
+            System.out.println("modifyUserHaslo error: " + e.getMessage());
         }
     }
+
+
+
 
 }
