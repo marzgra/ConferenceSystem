@@ -1,6 +1,8 @@
 package model;
 
-
+/**
+ * Created by Alicja on 2017-11-17.
+ */
 public class Uzytkownik {
 
     private int id;
@@ -38,7 +40,7 @@ public class Uzytkownik {
         this.login = login;
     }
 
-    public String getHaslo() {
+    String getHaslo() {
         return haslo;
     }
 
@@ -54,15 +56,15 @@ public class Uzytkownik {
         this.imie = imie;
     }
 
-    public String getNazwisko() {
+   public String getNazwisko() {
         return nazwisko;
     }
 
-    void setNazwisko(String nazwisko) {
+    public void setNazwisko(String nazwisko) {
         this.nazwisko = nazwisko;
     }
 
-    public String getEmail() {
+    String getEmail() {
         return email;
     }
 
@@ -70,7 +72,7 @@ public class Uzytkownik {
         this.email = email;
     }
 
-    public String getMiejscowosc() {
+    String getMiejscowosc() {
         return miejscowosc;
     }
 
