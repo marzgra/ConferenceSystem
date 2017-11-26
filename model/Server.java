@@ -62,7 +62,7 @@ public class Server {
 
     private Connection connection;
 
-    private Uzytkownik user;
+    private static Uzytkownik user;
 
     /***
      * lazy initialization - instance of this class won't be created, until
@@ -81,6 +81,10 @@ public class Server {
      */
     public static Server getInstance() {
         return instance;
+    }
+
+    public static Uzytkownik getUserInstance(){
+        return user;
     }
 
     public boolean open() {
