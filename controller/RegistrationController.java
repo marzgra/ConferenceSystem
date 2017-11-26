@@ -1,9 +1,12 @@
 package controller;
 
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -13,7 +16,9 @@ import java.util.ResourceBundle;
 
 import javafx.scene.layout.AnchorPane;
 
+import javafx.stage.Stage;
 import model.Server;
+import model.TypUzytkownika;
 
 import static model.TypUzytkownika.PRELEGENT;
 
@@ -22,7 +27,7 @@ import static model.TypUzytkownika.PRELEGENT;
  */
 
 
-public class RegistrationController implements Initializable {
+public class RegistrationController implements Initializable, ControlledScreen {
     @FXML
     private TextField name;
     @FXML
@@ -35,12 +40,23 @@ public class RegistrationController implements Initializable {
     private TextField password;
     @FXML
     private TextField password2;
-    //    @FXML
-//    private TextField typeuser;
+    @FXML
+    private ChoiceBox wybor;
     @FXML
     private TextField login;
     @FXML
-   private AnchorPane pane1;
+    private AnchorPane pane1;
+
+    TypUzytkownika typUzytkownika;
+
+
+    ScreensController myController;
+
+    public void setScreenParent(ScreensController screenParent) {
+        myController = screenParent;
+    }
+
+    MainController homepage;
 
 
     @Override
@@ -48,31 +64,31 @@ public class RegistrationController implements Initializable {
 
     }
 
+    @FXML
     public void przeslij(ActionEvent actionEvent) {
 
-System.out.println("SZlak mnie trafi");
-System.out.println("SZlak mnie trafi");
+        if (wybor.getValue().toString().equals("UCZESTNIK")) {
+            typUzytkownika = TypUzytkownika.UCZESTNIK;
+        } else if (wybor.getValue().toString().equals("PRELEGENT")) {
+            typUzytkownika = TypUzytkownika.PRELEGENT;
+        } else if (wybor.getValue().toString().equals("ORGANIZATOR")) {
+            typUzytkownika = TypUzytkownika.ORGANIZATOR;
+        }
         try {
-            Server.getInstance().insertUser(login.getText(), password.getText(),name.getText(), surname.getText(), email.getText(), country.getText(),PRELEGENT);
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+            Server.getInstance().insertUser(login.getText(), password.getText(), name.getText(), surname.getText(), email.getText(), country.getText(), typUzytkownika);
+        } catch (Exception e) {
+            e.getMessage();
         }
 
-
+        myController.setScreen(Main.screen1ID);
     }
 
-    public void onclickStronaGlowna(){
+    @FXML
+    public void onclickStronaGlowna() {
 
 
-//        AnchorPane pane= null;
-//        try {
-//            pane = FXMLLoader.load(getClass().getResource("/view/Homepage.fxml"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        pane1.getChildren().setAll(pane);
-//
-
+        myController.setScreen(Main.screen1ID);
 
 
     }

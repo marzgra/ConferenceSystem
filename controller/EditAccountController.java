@@ -1,23 +1,20 @@
 package controller;
 
-
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextField;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.TextField;
 import model.Server;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Alicja on 2017-11-25.
+ * Created by Alicja on 2017-11-26.
  */
-public class MyAccountController implements Initializable, ControlledScreen {
+public class EditAccountController implements Initializable, ControlledScreen {
+
     @FXML
     private TextField nameText;
     @FXML
@@ -40,7 +37,14 @@ public class MyAccountController implements Initializable, ControlledScreen {
         myController = screenParent;
     }
 
-    public void initialize(URL location, ResourceBundle resources) {
+    public void onClickPowrot(ActionEvent actionEvent) {
+        myController.setScreen(Main.screen5ID);
+    }
+
+    public void onClickZapisz(ActionEvent actionEvent) {
+        Server.getInstance().modifyUserMiejscowosc(countryText.getText());
+        Server.getInstance().modifyUserEmail(emailText.getText());
+        Server.getInstance().modifyUserHaslo(passwordText.getText());
 
     }
 
@@ -49,23 +53,13 @@ public class MyAccountController implements Initializable, ControlledScreen {
         myController.setScreen(Main.screen1ID);
     }
 
-    public void onClickEdytujDane(ActionEvent actionEvent) {
-        myController.setScreen(Main.screen7ID);
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void onClickMojeKonferencje(ActionEvent actionEvent) {
-
-
-    }
-
-    public void onClickPowrot(ActionEvent actionEvent) {
-        myController.setScreen(Main.screen5ID);
-
-    }
-
-
-    public void onClickWyswietl(ActionEvent actionEvent) {
+    public void onClickWyswietlDane(ActionEvent actionEvent) {
         nameText.setText(Server.getUserInstance().getImie());
         surnameText.setText(Server.getUserInstance().getNazwisko());
         countryText.setText(Server.getUserInstance().getMiejscowosc());
@@ -75,4 +69,3 @@ public class MyAccountController implements Initializable, ControlledScreen {
         emailText.setText(Server.getUserInstance().getEmail());
     }
 }
-

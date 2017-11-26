@@ -1,38 +1,57 @@
 package application;
 
+import controller.ScreensController;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-
-
-import controller.MainController;
 import model.Server;
 
 
 public class Main extends Application {
-    @FXML
-    private MainController MainController;
+    public static String screen1ID = "main";
+    public static String screen1File = "/view/Homepage.fxml";
+    public static String screen2ID = "screen2";
+    public static String screen2File = "/view/Registration.fxml";
+   public static String screen3ID = "screen3";
+    public static String screen3File = "/view/LogIn.fxml";
+    public static String screen4ID = "screen4";
+    public static String screen4File = "/view/MyAccount.fxml";
+    public static String screen5ID = "screen5";
+    public static String screen5File = "/view/HomepageUP.fxml";
+    public static String screen6ID = "screen6";
+    public static String screen6File = "/view/HomepageOrganizator.fxml";
+    public static String screen7ID = "screen7";
+    public static String screen7File = "/view/EditAccount.fxml";
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Homepage.fxml"));
-            Parent parent = loader.load();
-            //Scene scene = new Scene(parent);
-            //stage.getIcons().add(new Image(this.getClass().getResource("login.png").toString()));
-            primaryStage.setTitle("System wspomagający organizacje konferencji");
-            primaryStage.setScene(new Scene(parent, 900,600));
+
+//            primaryStage.setScene(new Scene(parent, 900,600));
+
+            ScreensController mainContainer = new ScreensController();
+            mainContainer.loadScreen(Main.screen1ID, Main.screen1File);
+            mainContainer.loadScreen(Main.screen2ID, Main.screen2File);
+            mainContainer.loadScreen(Main.screen3ID, Main.screen3File);
+            mainContainer.loadScreen(Main.screen4ID, Main.screen4File);
+            mainContainer.loadScreen(Main.screen5ID, Main.screen5File);
+            mainContainer.loadScreen(Main.screen6ID, Main.screen6File);
+            mainContainer.loadScreen(Main.screen7ID, Main.screen7File);
+
+            mainContainer.setScreen(Main.screen1ID);
+
+            Group root = new Group();
+            root.getChildren().addAll(mainContainer);
+            //Scene scene = new Scene(root);
+
+            primaryStage.setScene(new Scene(root, 900,600));
             primaryStage.show();
-            //  primaryStage.getIcons().add(this.getClass().getResource("login.png").toString()));
-            //primaryStage.setResizable(false);
 
             primaryStage.setOnCloseRequest((WindowEvent we) -> {
                 Alert a = new Alert(Alert.AlertType.CONFIRMATION);
@@ -49,10 +68,7 @@ public class Main extends Application {
                     }
                 });
             });
-            MainController = ( MainController) loader.getController();
-            MainController.setPrevStage(primaryStage);
 
-            System.out.println( MainController);
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -60,6 +76,7 @@ public class Main extends Application {
 
 
     }
+
 
     //    @Override
     public void init() throws Exception {
