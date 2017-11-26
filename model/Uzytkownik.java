@@ -22,11 +22,11 @@ public class Uzytkownik {
         this.miejscowosc = miejscowosc;
     }
 
-    int getId() {
+    public int getId() {
         return id;
     }
 
-    void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -34,7 +34,7 @@ public class Uzytkownik {
         return login;
     }
 
-    void setLogin(String login) {
+    public void setLogin(String login) {
         this.login = login;
     }
 
@@ -42,7 +42,7 @@ public class Uzytkownik {
         return haslo;
     }
 
-    void setHaslo(String haslo) {
+    public void setHaslo(String haslo) {
         this.haslo = haslo;
     }
 
@@ -50,7 +50,7 @@ public class Uzytkownik {
         return imie;
     }
 
-    void setImie(String imie) {
+    public void setImie(String imie) {
         this.imie = imie;
     }
 
@@ -58,7 +58,7 @@ public class Uzytkownik {
         return nazwisko;
     }
 
-    void setNazwisko(String nazwisko) {
+    public void setNazwisko(String nazwisko) {
         this.nazwisko = nazwisko;
     }
 
@@ -66,7 +66,7 @@ public class Uzytkownik {
         return email;
     }
 
-    void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -74,7 +74,7 @@ public class Uzytkownik {
         return miejscowosc;
     }
 
-    void setMiejscowosc(String miejscowosc) {
+    public void setMiejscowosc(String miejscowosc) {
         this.miejscowosc = miejscowosc;
     }
 
