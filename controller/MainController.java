@@ -1,5 +1,6 @@
 package controller;
 
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,47 +13,28 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class MainController implements Initializable {
-    //
-//    @FXML
-//    private Button zalogujSie;
-//
-    Stage prevStage;
+public class MainController implements Initializable, ControlledScreen {
+
+    ScreensController myController;
+
+    public void setScreenParent(ScreensController screenParent) {
+        myController = screenParent;
+    }
+
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 
 
+    @FXML
+    public void onClickZaloguj(ActionEvent event) {
+        myController.setScreen(Main.screen3ID);
 
-    public void setPrevStage(Stage stage)
-    {
-        this.prevStage = stage;
     }
 
     @FXML
-    private AnchorPane rootPane;
-
-    @FXML
-    public void onClickZaloguj(ActionEvent event)
-    {
-        AnchorPane pane= null;
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/view/LogIn.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        rootPane.getChildren().setAll(pane);
-
-    }
-    @FXML
-    public void onClickZapisz(ActionEvent event)
-    {
-        AnchorPane pane= null;
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/view/Registration.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        rootPane.getChildren().setAll(pane);
+    public void onClickZapisz(ActionEvent event) {
+        myController.setScreen(Main.screen2ID);
 
     }
 }

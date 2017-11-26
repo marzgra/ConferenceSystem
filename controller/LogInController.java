@@ -1,52 +1,82 @@
 package controller;
 
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import model.Server;
 
 
 import java.io.IOException;
 import java.net.URL;
+
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
  * Created by Alicja on 2017-11-11.
  */
-public class LogInController implements Initializable {
+public class LogInController implements Initializable, ControlledScreen {
+
 
     @FXML
-    private AnchorPane loginPane;
+    private TextField login1;
     @FXML
+    private TextField haslo1;
 
+    ScreensController myController;
 
+    public void setScreenParent(ScreensController screenParent) {
+        myController = screenParent;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        login1.setText("");
+        haslo1.setText("");
 
     }
 
     public void onClickZapisz(ActionEvent actionEvent) {
-        AnchorPane pane= null;
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/view/Registration.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        loginPane.getChildren().setAll(pane);
+        myController.setScreen(Main.screen2ID);
     }
+
     @FXML
-    public void onclickStronaGlowna(ActionEvent actionEvent) {
-        AnchorPane pane= null;
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/view/panelG.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void onclickZaloguj(ActionEvent actionEvent) {
+
+        Boolean znaleziono;
+        znaleziono = Server.getInstance().logIn(login1.getText(), haslo1.getText());
+        System.out.println(znaleziono);
+        if (znaleziono == true) {
+            myController.setScreen(Main.screen5ID);
+        } else {
+            System.out.println("Nie wchodzimy");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Niepoprawny login lub haslo. Sprobuj jeszcze raz.",
+                    ButtonType.YES);
+            alert.setTitle("Ostrzezenie");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+
+            }
         }
-        loginPane.getChildren().setAll(pane);
+        login1.setText("");
+        haslo1.setText("");
+
+    }
+
+    public void onclickStronaGlowna() {
+
+        myController.setScreen(Main.screen1ID);
+
+
     }
 
 

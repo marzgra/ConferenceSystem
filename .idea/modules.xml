@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ConferenceSystem-master.iml" filepath="$PROJECT_DIR$/ConferenceSystem-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ConferenceSystem.iml" filepath="$PROJECT_DIR$/ConferenceSystem.iml" />
     </modules>
   </component>
 </project>

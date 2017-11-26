@@ -1,9 +1,7 @@
 package model;
 
-/**
- * Created by Alicja on 2017-11-17.
- */
-class Uzytkownik {
+
+public class Uzytkownik {
 
     private int id;
     private String login;
@@ -24,59 +22,59 @@ class Uzytkownik {
         this.miejscowosc = miejscowosc;
     }
 
-    int getId() {
+    public int getId() {
         return id;
     }
 
-    void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    String getLogin() {
+    public String getLogin() {
         return login;
     }
 
-    void setLogin(String login) {
+    public void setLogin(String login) {
         this.login = login;
     }
 
-    String getHaslo() {
+    public String getHaslo() {
         return haslo;
     }
 
-    void setHaslo(String haslo) {
+    public void setHaslo(String haslo) {
         this.haslo = haslo;
     }
 
-    String getImie() {
+    public String getImie() {
         return imie;
     }
 
-    void setImie(String imie) {
+    public void setImie(String imie) {
         this.imie = imie;
     }
 
-    String getNazwisko() {
+    public String getNazwisko() {
         return nazwisko;
     }
 
-    void setNazwisko(String nazwisko) {
+    public void setNazwisko(String nazwisko) {
         this.nazwisko = nazwisko;
     }
 
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    String getMiejscowosc() {
+    public String getMiejscowosc() {
         return miejscowosc;
     }
 
-    void setMiejscowosc(String miejscowosc) {
+    public void setMiejscowosc(String miejscowosc) {
         this.miejscowosc = miejscowosc;
     }
 
