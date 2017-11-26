@@ -17,8 +17,11 @@ public class Server {
     private static final String KOLUMNA_ID_UCZESTNIK = "ID_UCZESTNIK";
     private static final String KOLUMNA_ID_ORGANIZATOR = "ID_ORGANIZATOR";
     private static final String KOLUMNA_ID_PRELEGENT = "ID_PRELEGENT";
-    private static final String KOLUMNA_LOGIN_UZYTKOWNIK = "LOGIN";
-    private static final String KOLUMNA_HASLO_UZYTKOWNIKA = "HASLO";
+    private static final String KOLUMNA_LOGIN = "LOGIN";
+    private static final String KOLUMNA_HASLO = "HASLO";
+    private static final String KOLUMNA_EMAIL = "EMAIL";
+    private static final String KOLUMNA_MIEJSCOWOSC = "MIEJSCOWOSC";
+
 
 
     private static final String NOWY_UZYTKOWNIK = "INSERT INTO " + TABELA_UZYTKOWNIK
@@ -38,10 +41,22 @@ public class Server {
             + "(?)";
 
     private static final String ZNAJDZ_UZYTKOWNIKA = "SELECT COUNT(1) FROM "
-            + TABELA_UZYTKOWNIK + " WHERE " + KOLUMNA_LOGIN_UZYTKOWNIK + " = ?";
+            + TABELA_UZYTKOWNIK + " WHERE " + KOLUMNA_LOGIN + " = ?";
 
-    private static final String SPRAWDZ_HASLO = "SELECT " + KOLUMNA_HASLO_UZYTKOWNIKA + " FROM "
-            + TABELA_UZYTKOWNIK + " WHERE " + KOLUMNA_LOGIN_UZYTKOWNIK + " = ?";
+    private static final String SPRAWDZ_HASLO = "SELECT " + KOLUMNA_HASLO + " FROM "
+            + TABELA_UZYTKOWNIK + " WHERE " + KOLUMNA_LOGIN + " = ?";
+
+    private static final String USUN_UZYTKOWNIKA = "DELETE FROM " + TABELA_UZYTKOWNIK
+            + " WHERE " + KOLUMNA_LOGIN + " = ?";
+
+    private static final String ZMIEN_EMAIL = "UPDATE " + TABELA_UZYTKOWNIK + " SET "
+            + KOLUMNA_EMAIL + " = ? WHERE " + KOLUMNA_LOGIN + " = ?";
+
+    private static final String ZMIEN_HASLO = "UPDATE " + TABELA_UZYTKOWNIK + " SET "
+            + KOLUMNA_HASLO + " = ? WHERE " + KOLUMNA_LOGIN + " = ?";
+
+    private static final String ZMIEN_MIEJSCOWOSC = "UPDATE " + TABELA_UZYTKOWNIK + " SET "
+            + KOLUMNA_MIEJSCOWOSC + " = ? WHERE " + KOLUMNA_LOGIN + " = ?";
 
     private Connection connection;
 
@@ -157,7 +172,7 @@ public class Server {
 
     public boolean insertUser(String login, String haslo,
                               String imie, String nazwisko,
-                              String email, String miejscowosc, TypUzytkownika typ) throws SQLException {
+                              String email, String miejscowosc, TypUzytkownika typ){
 
         if (isLoginFree(login)) {
             try {
@@ -224,8 +239,50 @@ public class Server {
         }
     }
 
-    //TODO usuwanie uztkownika z tabeli uzytkownik i tabeli uczestnik/prganizator/prelegent
+    //TODO usuwanie uztkownika z tabeli uzytkownik i tabeli uczestnik/prganizator/prelegent i powiazanych tabel wywolanie wyzwalacza
+    public void deleteUsesr(String login){
+        try{
+            PreparedStatement statement = connection.prepareStatement(USUN_UZYTKOWNIKA);
+            statement.setString(1, login);
+            statement.executeUpdate();
 
-    //TODO edycja danych: miejscowosc, haslo, email
+        } catch (SQLException e) {
+            System.out.println("Usun uzytkownika error: " + e.getMessage());
+        }
+    }
+
+
+    public void modifyUserEmail(String login, String email) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(ZMIEN_EMAIL);
+            statement.setString(1, email);
+            statement.setString(2, login);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("modifyUserEmail error: " + e.getMessage());
+        }
+    }
+
+    public void modifyUserMiejscowosc(String login, String miejscowosc) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(ZMIEN_MIEJSCOWOSC);
+            statement.setString(1, miejscowosc);
+            statement.setString(2, login);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("modifyUserEmail error: " + e.getMessage());
+        }
+    }
+
+    public void modifyUserHaslo(String login, String haslo) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(ZMIEN_HASLO);
+            statement.setString(1, haslo);
+            statement.setString(2, login);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("modifyUserEmail error: " + e.getMessage());
+        }
+    }
 
 }
