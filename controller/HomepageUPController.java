@@ -14,8 +14,6 @@ import java.util.ResourceBundle;
  */
 public class HomepageUPController implements Initializable, ControlledScreen {
 
-    @FXML
-    private Button mojeKonto;
 
     ScreensController myController;
 

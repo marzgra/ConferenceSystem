@@ -40,7 +40,7 @@ public class Uzytkownik {
         this.login = login;
     }
 
-    String getHaslo() {
+    public String getHaslo() {
         return haslo;
     }
 
@@ -64,7 +64,7 @@ public class Uzytkownik {
         this.nazwisko = nazwisko;
     }
 
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -72,7 +72,7 @@ public class Uzytkownik {
         this.email = email;
     }
 
-    String getMiejscowosc() {
+    public String getMiejscowosc() {
         return miejscowosc;
     }
 

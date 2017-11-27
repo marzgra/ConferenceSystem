@@ -16,10 +16,7 @@ import java.util.ResourceBundle;
  * Created by Alicja on 2017-11-21.
  */
 public class HomepageOrganizatorController implements Initializable, ControlledScreen {
-    @FXML
-    private AnchorPane rootPane;
-    @FXML
-    private Button mojeKonto;
+
 
     ScreensController myController;
 
