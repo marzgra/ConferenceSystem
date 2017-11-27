@@ -38,7 +38,14 @@ public class EditAccountController implements Initializable, ControlledScreen {
     }
 
     public void onClickPowrot(ActionEvent actionEvent) {
-        myController.setScreen(Main.screen5ID);
+        myController.setScreen(Main.screen4ID);
+        nameText.setText(" ");
+        surnameText.setText(" ");
+        countryText.setText(" ");
+        loginText.setText(" ");
+        passwordText.setText(" ");
+        personText.setText(" ");
+        emailText.setText(" ");
     }
 
     public void onClickZapisz(ActionEvent actionEvent) {

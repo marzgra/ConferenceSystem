@@ -42,6 +42,7 @@ public class MyAccountController implements Initializable, ControlledScreen {
 
     public void initialize(URL location, ResourceBundle resources) {
 
+
     }
 
     public void onClickUsunKonto(ActionEvent actionEvent) {
@@ -62,6 +63,13 @@ public class MyAccountController implements Initializable, ControlledScreen {
     public void onClickPowrot(ActionEvent actionEvent) {
         myController.setScreen(Main.screen5ID);
 
+        nameText.setText(" ");
+        surnameText.setText(" ");
+        countryText.setText(" ");
+        loginText.setText(" ");
+        passwordText.setText(" ");
+        personText.setText(" ");
+        emailText.setText(" ");
     }
 
 

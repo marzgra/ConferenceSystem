@@ -44,8 +44,6 @@ public class RegistrationController implements Initializable, ControlledScreen {
     private ChoiceBox wybor;
     @FXML
     private TextField login;
-    @FXML
-    private AnchorPane pane1;
 
     TypUzytkownika typUzytkownika;
 
@@ -82,6 +80,14 @@ public class RegistrationController implements Initializable, ControlledScreen {
         }
 
         myController.setScreen(Main.screen1ID);
+        name.setText("");
+        surname.setText("");
+        country.setText("");
+        login.setText("");
+        password.setText("");
+        password2.setText("");
+        wybor.setValue("");
+        email.setText("");
     }
 
     @FXML

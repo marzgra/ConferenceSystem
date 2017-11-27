@@ -17,7 +17,7 @@ public class Main extends Application {
     public static String screen1File = "/view/Homepage.fxml";
     public static String screen2ID = "screen2";
     public static String screen2File = "/view/Registration.fxml";
-   public static String screen3ID = "screen3";
+    public static String screen3ID = "screen3";
     public static String screen3File = "/view/LogIn.fxml";
     public static String screen4ID = "screen4";
     public static String screen4File = "/view/MyAccount.fxml";
@@ -30,8 +30,8 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        try{
+    public void start(Stage primaryStage) throws Exception {
+        try {
 
 //            primaryStage.setScene(new Scene(parent, 900,600));
 
@@ -50,7 +50,7 @@ public class Main extends Application {
             root.getChildren().addAll(mainContainer);
             //Scene scene = new Scene(root);
 
-            primaryStage.setScene(new Scene(root, 900,600));
+            primaryStage.setScene(new Scene(root, 900, 600));
             primaryStage.show();
 
             primaryStage.setOnCloseRequest((WindowEvent we) -> {
@@ -58,19 +58,16 @@ public class Main extends Application {
                 a.setTitle("Ostrzezenie");
                 a.setHeaderText("Czy na pewno chcesz zakonczyc program?");
                 a.showAndWait().ifPresent(response -> {
-                    if (response == ButtonType.OK)
-                    {
+                    if (response == ButtonType.OK) {
                         Platform.exit();
 
-                    } else
-                    {
+                    } else {
                         we.consume();
                     }
                 });
             });
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -78,22 +75,24 @@ public class Main extends Application {
     }
 
 
-    //    @Override
+    @Override
     public void init() throws Exception {
-//        super.init();
+        super.init();
 //
-        Server.getInstance().open();
-        //{
-//            System.out.println("FATAL ERROR: Couldn't connect to database");
-//            Platform.exit();
-//        }
+        if (Server.getInstance().open()) {
+
+        } else {
+            System.out.println("FATAL ERROR: Couldn't connect to database");
+            Platform.exit();
+        }
     }
-    //
-//    @Override
-//    public void stop() throws Exception {
-//        super.stop();
-//        Server.getInstance().close();
-//    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        Server.getInstance().close();
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
