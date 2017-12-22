@@ -15,14 +15,15 @@ import java.util.ResourceBundle;
 /**
  * Created by Alicja on 2017-11-21.
  */
-public class HomepageOrganizatorController implements Initializable,ControlledScreen {
+public class HomepageOrganizatorController implements Initializable, ControlledScreen {
     @FXML
     private AnchorPane rootPane;
     @FXML
     private Button mojeKonto;
 
     ScreensController myController;
-    public void setScreenParent(ScreensController screenParent){
+
+    public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
 
@@ -30,6 +31,7 @@ public class HomepageOrganizatorController implements Initializable,ControlledSc
     public void onClickWyloguj(ActionEvent actionEvent) {
         myController.setScreen(Main.screen1ID);
     }
+
     @FXML
     public void onClickMojeKonto(ActionEvent actionEvent) {
         myController.setScreen(Main.screen4ID);

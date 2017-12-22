@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import model.Server;
 
 
-
 import java.io.IOException;
 import java.net.URL;
 
@@ -24,7 +23,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Alicja on 2017-11-11.
  */
-public class LogInController implements Initializable,ControlledScreen {
+public class LogInController implements Initializable, ControlledScreen {
 
 
     @FXML
@@ -33,25 +32,29 @@ public class LogInController implements Initializable,ControlledScreen {
     private TextField haslo1;
 
     ScreensController myController;
-    public void setScreenParent(ScreensController screenParent){
+
+    public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        login1.setText("");
+        haslo1.setText("");
 
     }
 
     public void onClickZapisz(ActionEvent actionEvent) {
         myController.setScreen(Main.screen2ID);
     }
+
     @FXML
     public void onclickZaloguj(ActionEvent actionEvent) {
-        AnchorPane pane = null;
-        int znaleziono;
-        znaleziono = Server.getInstance().checkLoginPass(login1.getText(), haslo1.getText());
+
+        Boolean znaleziono;
+        znaleziono = Server.getInstance().logIn(login1.getText(), haslo1.getText());
         System.out.println(znaleziono);
-        if (znaleziono == 1) {
+        if (znaleziono == true) {
             myController.setScreen(Main.screen5ID);
         } else {
             System.out.println("Nie wchodzimy");
@@ -64,10 +67,12 @@ public class LogInController implements Initializable,ControlledScreen {
 
             }
         }
+        login1.setText("");
+        haslo1.setText("");
 
     }
 
-    public void onclickStronaGlowna(){
+    public void onclickStronaGlowna() {
 
         myController.setScreen(Main.screen1ID);
 

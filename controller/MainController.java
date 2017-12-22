@@ -13,37 +13,28 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class MainController implements Initializable,ControlledScreen {
+public class MainController implements Initializable, ControlledScreen {
 
     ScreensController myController;
-    public void setScreenParent(ScreensController screenParent){
+
+    public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
+
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
-
-
-
-
-    @FXML
-    private AnchorPane rootPane;
-    public void setContentPane(AnchorPane contentPane)
-    {
-        this.rootPane = contentPane;
+    public void initialize(URL location, ResourceBundle resources) {
     }
 
+
     @FXML
-    public void onClickZaloguj(ActionEvent event)
-    {
+    public void onClickZaloguj(ActionEvent event) {
         myController.setScreen(Main.screen3ID);
 
     }
+
     @FXML
-    public void onClickZapisz(ActionEvent event)
-    {
+    public void onClickZapisz(ActionEvent event) {
         myController.setScreen(Main.screen2ID);
 
     }
 }
-
-

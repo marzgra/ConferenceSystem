@@ -77,8 +77,8 @@ public class RegistrationController implements Initializable, ControlledScreen {
         try {
 
             Server.getInstance().insertUser(login.getText(), password.getText(), name.getText(), surname.getText(), email.getText(), country.getText(), typUzytkownika);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            e.getMessage();
         }
 
         myController.setScreen(Main.screen1ID);

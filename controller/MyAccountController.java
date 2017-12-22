@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Alicja on 2017-11-25.
  */
-public class MyAccountController implements Initializable,ControlledScreen{
+public class MyAccountController implements Initializable, ControlledScreen {
     @FXML
     private TextField nameText;
     @FXML
@@ -35,7 +35,8 @@ public class MyAccountController implements Initializable,ControlledScreen{
 
 
     ScreensController myController;
-    public void setScreenParent(ScreensController screenParent){
+
+    public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
 
@@ -44,7 +45,7 @@ public class MyAccountController implements Initializable,ControlledScreen{
     }
 
     public void onClickUsunKonto(ActionEvent actionEvent) {
-
+        Server.getInstance().deleteUsesr();
         myController.setScreen(Main.screen1ID);
     }
 
@@ -56,8 +57,6 @@ public class MyAccountController implements Initializable,ControlledScreen{
     public void onClickMojeKonferencje(ActionEvent actionEvent) {
 
 
-
-
     }
 
     public void onClickPowrot(ActionEvent actionEvent) {
@@ -67,13 +66,12 @@ public class MyAccountController implements Initializable,ControlledScreen{
 
 
     public void onClickWyswietl(ActionEvent actionEvent) {
-        nameText.setText(Server.getInstance().userName());
-        surnameText.setText(Server.getInstance().userSurname());
-        countryText.setText(Server.getInstance().userCountry());
-        loginText.setText(Server.getInstance().userLogin());
-        passwordText.setText(Server.getInstance().userPass());
-        personText.setText(Server.getInstance().userName());
-        emailText.setText(Server.getInstance().userEmail());
+        nameText.setText(Server.getUserInstance().getImie());
+        surnameText.setText(Server.getUserInstance().getNazwisko());
+        countryText.setText(Server.getUserInstance().getMiejscowosc());
+        loginText.setText(Server.getUserInstance().getLogin());
+        passwordText.setText(Server.getUserInstance().getHaslo());
+        personText.setText(Server.getUserInstance().getImie());
+        emailText.setText(Server.getUserInstance().getEmail());
     }
 }
-

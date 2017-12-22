@@ -1,16 +1,10 @@
 package model;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
-import java.io.IOException;
 import java.sql.*;
-import java.util.Optional;
 
 public class Server {
 
-    private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
     private static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:orcl";
     private static final String DB_USER = "TO_PROJEKT";
     private static final String DB_PASSWORD = "projekt";
@@ -20,8 +14,9 @@ public class Server {
     private static final String TABELA_PRELEGENT = "PRELEGENT";
     private static final String TABELA_ORGANIZATOR = "ORGANIZATOR";
     private static final String KOLUMNA_ID_UZYTKOWNIK = "ID_UZYTKOWNIK";
-    private static final String KOLUMNA_IMIE = "IMIE";
-    private static final String KOLUMNA_NAZWISKO = "NAZWISKO";
+    private static final String KOLUMNA_ID_UCZESTNIK = "ID_UCZESTNIK";
+    private static final String KOLUMNA_ID_ORGANIZATOR = "ID_ORGANIZATOR";
+    private static final String KOLUMNA_ID_PRELEGENT = "ID_PRELEGENT";
     private static final String KOLUMNA_LOGIN = "LOGIN";
     private static final String KOLUMNA_HASLO = "HASLO";
     private static final String KOLUMNA_EMAIL = "EMAIL";
@@ -33,35 +28,41 @@ public class Server {
             + "(?, ?, ?, ?, ?, ?, ?)";
 
     private static final String NOWY_UCZESTNIK = "INSERT INTO " + TABELA_UCZESTNIK
-            + "(ID_UZYTKOWNIK) VALUES"
+            + "(ID_UCZESTNIK) VALUES"
             + "(?)";
 
     private static final String NOWY_ORGANIZATOR = "INSERT INTO " + TABELA_ORGANIZATOR
-            + "(ID_UZYTKOWNIK) VALUES"
+            + "(ID_ORGANIZATOR) VALUES"
             + "(?)";
 
     private static final String NOWY_PRELEGENT = "INSERT INTO " + TABELA_PRELEGENT
-            + "(ID_UZYTKOWNIK) VALUES"
+            + "(ID_PRELEGENT) VALUES"
             + "(?)";
-    private static final String ZNAJDZ_IMIE = "SELECT " + KOLUMNA_IMIE + " FROM " + "UZYTKOWNIK WHERE " + KOLUMNA_LOGIN + "= ?";
-    private static final String ZNAJDZ_NAZWISKO = "SELECT " + KOLUMNA_NAZWISKO + " FROM " + "UZYTKOWNIK WHERE " + KOLUMNA_LOGIN + "= ?";
-    private static final String ZNAJDZ_LOGIN = "SELECT " + KOLUMNA_LOGIN + " FROM " + "UZYTKOWNIK WHERE " + KOLUMNA_LOGIN + "= ?";
-    private static final String ZNAJDZ_HASLO = "SELECT " + KOLUMNA_HASLO + " FROM " + "UZYTKOWNIK WHERE " + KOLUMNA_LOGIN + "= ?";
-    private static final String ZNAJDZ_MIEJSCOWOSC = "SELECT " + KOLUMNA_MIEJSCOWOSC + " FROM " + "UZYTKOWNIK WHERE " + KOLUMNA_LOGIN + "= ?";
-    private static final String ZNAJDZ_EMAIL = "SELECT " + KOLUMNA_EMAIL + " FROM " + "UZYTKOWNIK WHERE " + KOLUMNA_LOGIN + "= ?";
 
+    private static final String ZNAJDZ_UZYTKOWNIKA = "SELECT COUNT(1) FROM "
+            + TABELA_UZYTKOWNIK + " WHERE " + KOLUMNA_LOGIN + " = ?";
+
+    private static final String SPRAWDZ_HASLO = "SELECT " + KOLUMNA_HASLO + " FROM "
+            + TABELA_UZYTKOWNIK + " WHERE " + KOLUMNA_LOGIN + " = ?";
+
+    private static final String POBIERZ_DANE = "SELECT * FROM "
+            + TABELA_UZYTKOWNIK + " WHERE " + KOLUMNA_LOGIN + " = ? ";
+
+    private static final String USUN_UZYTKOWNIKA = "DELETE FROM " + TABELA_UZYTKOWNIK
+            + " WHERE " + KOLUMNA_LOGIN + " = ?";
+
+    private static final String ZMIEN_EMAIL = "UPDATE " + TABELA_UZYTKOWNIK + " SET "
+            + KOLUMNA_EMAIL + " = ? WHERE " + KOLUMNA_LOGIN + " = ?";
+
+    private static final String ZMIEN_HASLO = "UPDATE " + TABELA_UZYTKOWNIK + " SET "
+            + KOLUMNA_HASLO + " = ? WHERE " + KOLUMNA_LOGIN + " = ?";
+
+    private static final String ZMIEN_MIEJSCOWOSC = "UPDATE " + TABELA_UZYTKOWNIK + " SET "
+            + KOLUMNA_MIEJSCOWOSC + " = ? WHERE " + KOLUMNA_LOGIN + " = ?";
 
     private Connection connection;
 
-    private String login1;
-
-    public void setLogin(String login) {
-        this.login1 = login;
-    }
-
-    public String getLogin1() {
-        return login1;
-    }
+    private static Uzytkownik user;
 
     /***
      * lazy initialization - instance of this class won't be created, until
@@ -76,14 +77,18 @@ public class Server {
     }
 
     /***
-     *
      * @return singleton - there is only one instance of this object
      */
     public static Server getInstance() {
         return instance;
     }
 
+    public static Uzytkownik getUserInstance(){
+        return user;
+    }
+
     public boolean open() {
+
         try {
             connection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
             return true;
@@ -93,7 +98,11 @@ public class Server {
         }
     }
 
+    /**
+     * close connection to db
+     */
     public void close() {
+
         try {
             if (connection != null) {
                 connection.close();
@@ -103,7 +112,12 @@ public class Server {
         }
     }
 
-    public int getCount(String table) {
+    /**
+     * @param table from db
+     * @return number of rows in table
+     */
+    private int getCount(String table) {
+
         String sql = "SELECT COUNT(*) AS count FROM " + table;
 
         try (Statement statement = connection.createStatement();
@@ -113,8 +127,6 @@ public class Server {
             while (results.next()) {
                 count = results.getInt(1);
             }
-
-//            System.out.format("Count = %d\n", count);
             return count;
         } catch (SQLException e) {
             System.out.println("Query failed: " + e.getMessage());
@@ -122,7 +134,13 @@ public class Server {
         }
     }
 
+    /**
+     * @param table  from db
+     * @param column ID column
+     * @return new value used as an ID of new record in db
+     */
     private int getId(String table, String column) {
+
         String sql = "SELECT MAX(" + column + ") AS max FROM " + table;
         try (Statement statement = connection.createStatement();
              ResultSet result = statement.executeQuery(sql)) {
@@ -137,203 +155,174 @@ public class Server {
         }
     }
 
-    public void insertUser(String login, String haslo,
-                           String imie, String nazwisko,
-                           String email, String miejscowosc, TypUzytkownika typ) throws SQLException {
+    /**
+     * @param login check if this login already is used in db
+     * @return true if login is free
+     */
+    private boolean isLoginFree(String login) {
 
         try {
-            PreparedStatement statement = connection.prepareStatement(NOWY_UZYTKOWNIK);
-
-            int id = getId(TABELA_UZYTKOWNIK, KOLUMNA_ID_UZYTKOWNIK) + 1;
-
-            statement.setInt(1, id);
-            statement.setString(2, login);
-            statement.setString(3, haslo);
-            statement.setString(4, imie);
-            statement.setString(5, nazwisko);
-            statement.setString(6, email);
-            statement.setString(7, miejscowosc);
-
-            statement.executeUpdate();
-
-            if (typ == TypUzytkownika.UCZESTNIK) {
-                statement = connection.prepareStatement(NOWY_UCZESTNIK);
-                statement.setInt(1, id);
-            }
-            if (typ == TypUzytkownika.ORGANIZATOR) {
-                statement = connection.prepareStatement(NOWY_ORGANIZATOR);
-                statement.setInt(1, id);
-            }
-            if (typ == TypUzytkownika.PRELEGENT) {
-                statement = connection.prepareStatement(NOWY_PRELEGENT);
-                statement.setInt(1, id);
-            }
-
-            statement.executeUpdate();
-            System.out.println("Uzytkownik dodany.");
+            PreparedStatement statement = connection.prepareStatement(ZNAJDZ_UZYTKOWNIKA);
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(1) != 1;
 
         } catch (SQLException e) {
-            System.out.println("nie dodano uĹĽytkownika: " + e.getMessage());
+            System.out.println("isLoginFree error: " + e.getMessage());
+            return false;
         }
-
     }
 
-    public int checkLoginPass(String login, String haslo) {
+    /**
+     * create new user of declared type if given login is free
+     */
 
-        int znaleziono = 2;
+    public boolean insertUser(String login, String haslo,
+                              String imie, String nazwisko,
+                              String email, String miejscowosc, TypUzytkownika typ) {
 
-        try (Statement stmt = connection.createStatement();
-             Statement stmt2 = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT LOGIN FROM UZYTKOWNIK");
-             ResultSet rs2 = stmt2.executeQuery("SELECT HASLO FROM UZYTKOWNIK")) {
+        if (isLoginFree(login)) {
+            try {
+                PreparedStatement statement = connection.prepareStatement(NOWY_UZYTKOWNIK);
 
-            while (rs.next() && rs2.next()) {
+                int id = getId(TABELA_UZYTKOWNIK, KOLUMNA_ID_UZYTKOWNIK) + 1;
 
-                if (login.equals(rs.getString(1)) && (haslo.equals(rs2.getString(1)))) {
-                    znaleziono = 1;
-                    setLogin(rs.getString(1));
+                statement.setInt(1, id);
+                statement.setString(2, login);
+                statement.setString(3, haslo);
+                statement.setString(4, imie);
+                statement.setString(5, nazwisko);
+                statement.setString(6, email);
+                statement.setString(7, miejscowosc);
 
+                statement.executeUpdate();
+
+                if (typ == TypUzytkownika.UCZESTNIK) {
+                    statement = connection.prepareStatement(NOWY_UCZESTNIK);
+                    statement.setInt(1, id);
                 }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+                if (typ == TypUzytkownika.ORGANIZATOR) {
+                    statement = connection.prepareStatement(NOWY_ORGANIZATOR);
+                    statement.setInt(1, id);
+                }
+                if (typ == TypUzytkownika.PRELEGENT) {
+                    statement = connection.prepareStatement(NOWY_PRELEGENT);
+                    statement.setInt(1, id);
+                }
 
-        return znaleziono;
+                statement.executeUpdate();
+                System.out.println("Uzytkownik dodany.");
+                return true;
+
+            } catch (SQLException e) {
+                System.out.println("inserUser: nie dodano użytkownika: " + e.getMessage());
+                return false;
+            }
+        }
+        System.out.println("insertUser: nie dodano uzytkownika");
+        return false;
+
     }
 
-    public String userName() {
-        String wartosc = "null";
-        String LOG = getLogin1();
+    /**
+     * @return true if user with given password exists in db
+     */
+    public boolean logIn(String login, String haslo) {
 
-        PreparedStatement st1;
         try {
-            st1 = connection.prepareStatement(ZNAJDZ_IMIE);
-            // st1.setString(1,name);
-            st1.setString(1, LOG);
-            ResultSet rs = st1.executeQuery();
+            PreparedStatement statement = connection.prepareStatement(SPRAWDZ_HASLO);
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            if (resultSet.getString(1).equals(haslo)) {
+                System.out.println("Logowanie: haslo poprawne");
 
-            while (rs.next()) {
+                statement = connection.prepareStatement(POBIERZ_DANE);
+                statement.setString(1, login);
+                resultSet = statement.executeQuery();
+                resultSet.next();
 
-                wartosc = rs.getString(1);
+                user = new Uzytkownik(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7)
+                );
+                System.out.println(user.toString());
+                return true;
             }
+            System.out.println("Logowanie: niepoprawne hasło.");
+            return false;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Logowanie error: " + e.getMessage());
+            return false;
         }
-        return wartosc;
-
     }
 
-    public String userSurname() {
-        String wartosc = "null";
-        String LOG = getLogin1();
-
-        PreparedStatement st1;
+    /**
+     * delete user from table UZYTKOWNIK and other related tables (FK on delete cascade)
+     */
+    public void deleteUsesr() {
         try {
-            st1 = connection.prepareStatement(ZNAJDZ_NAZWISKO);
-            // st1.setString(1,name);
-            st1.setString(1, LOG);
-            ResultSet rs = st1.executeQuery();
+            PreparedStatement statement = connection.prepareStatement(USUN_UZYTKOWNIKA);
+            statement.setString(1, user.getLogin());
+            statement.executeUpdate();
 
-            while (rs.next()) {
-
-                wartosc = rs.getString(1);
-            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Usun uzytkownika error: " + e.getMessage());
         }
-        return wartosc;
-
     }
 
-    public String userCountry() {
-        String wartosc = "null";
-        String LOG = getLogin1();
-        String name = "IMIE";
-        PreparedStatement st1;
+    /**
+     * modify email
+     */
+    public void modifyUserEmail(String newEmail) {
+        user.setEmail(newEmail);
         try {
-            st1 = connection.prepareStatement(ZNAJDZ_MIEJSCOWOSC);
-            // st1.setString(1,name);
-            st1.setString(1, LOG);
-            ResultSet rs = st1.executeQuery();
-
-            while (rs.next()) {
-
-                wartosc = rs.getString(1);
-            }
+            PreparedStatement statement = connection.prepareStatement(ZMIEN_EMAIL);
+            statement.setString(1, newEmail);
+            statement.setString(2, user.getLogin());
+            statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("modifyUserEmail error: " + e.getMessage());
         }
-        return wartosc;
-
     }
 
-    public String userPass() {
-        String wartosc = "null";
-        String LOG = getLogin1();
-        String name = "IMIE";
-        PreparedStatement st1;
+    /**
+     * modify city
+     */
+    public void modifyUserMiejscowosc(String newMiejscowosc) {
+        user.setMiejscowosc(newMiejscowosc);
         try {
-            st1 = connection.prepareStatement(ZNAJDZ_HASLO);
-            // st1.setString(1,name);
-            st1.setString(1, LOG);
-            ResultSet rs = st1.executeQuery();
-
-            while (rs.next()) {
-
-                wartosc = rs.getString(1);
-            }
+            PreparedStatement statement = connection.prepareStatement(ZMIEN_MIEJSCOWOSC);
+            statement.setString(1, newMiejscowosc);
+            statement.setString(2, user.getLogin());
+            statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("modifyUserMiejscowosc error: " + e.getMessage());
         }
-        return wartosc;
-
     }
 
-    public String userEmail() {
-        String wartosc = "null";
-        String LOG = getLogin1();
-        String name = "IMIE";
-        PreparedStatement st1;
+    /**
+     * modify password
+     */
+    public void modifyUserHaslo(String newHaslo) {
+        user.setHaslo(newHaslo);
         try {
-            st1 = connection.prepareStatement(ZNAJDZ_EMAIL);
-            // st1.setString(1,name);
-            st1.setString(1, LOG);
-            ResultSet rs = st1.executeQuery();
-
-            while (rs.next()) {
-
-                wartosc = rs.getString(1);
-            }
+            PreparedStatement statement = connection.prepareStatement(ZMIEN_HASLO);
+            statement.setString(1, newHaslo);
+            statement.setString(2, user.getLogin());
+            statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("modifyUserHaslo error: " + e.getMessage());
         }
-        return wartosc;
-
     }
 
-    public String userLogin() {
-        String wartosc = "null";
-        String LOG = getLogin1();
-        String name = "IMIE";
-        PreparedStatement st1;
-        try {
-            st1 = connection.prepareStatement(ZNAJDZ_LOGIN);
-            // st1.setString(1,name);
-            st1.setString(1, LOG);
-            ResultSet rs = st1.executeQuery();
 
-            while (rs.next()) {
-
-                wartosc = rs.getString(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return wartosc;
-
-    }
 
 
 }
-
