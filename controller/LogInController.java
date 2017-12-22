@@ -1,5 +1,6 @@
 package controller;
 
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -9,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import model.Server;
 
 
@@ -22,16 +24,18 @@ import java.util.ResourceBundle;
 /**
  * Created by Alicja on 2017-11-11.
  */
-public class LogInController implements Initializable {
+public class LogInController implements Initializable,ControlledScreen {
 
-    @FXML
-    private AnchorPane loginPane;
+
     @FXML
     private TextField login1;
     @FXML
     private TextField haslo1;
 
-
+    ScreensController myController;
+    public void setScreenParent(ScreensController screenParent){
+        myController = screenParent;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,13 +43,7 @@ public class LogInController implements Initializable {
     }
 
     public void onClickZapisz(ActionEvent actionEvent) {
-        AnchorPane pane= null;
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/view/Registration.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        loginPane.getChildren().setAll(pane);
+        myController.setScreen(Main.screen2ID);
     }
     @FXML
     public void onclickZaloguj(ActionEvent actionEvent) {
@@ -54,13 +52,7 @@ public class LogInController implements Initializable {
         znaleziono = Server.getInstance().checkLoginPass(login1.getText(), haslo1.getText());
         System.out.println(znaleziono);
         if (znaleziono == 1) {
-            try {
-                pane = FXMLLoader.load(getClass().getResource("/view/HomepageUP.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            loginPane.getChildren().setAll(pane);
-
+            myController.setScreen(Main.screen5ID);
         } else {
             System.out.println("Nie wchodzimy");
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
@@ -77,15 +69,7 @@ public class LogInController implements Initializable {
 
     public void onclickStronaGlowna(){
 
-        AnchorPane pane= null;
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/view/Homepage.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        loginPane.getChildren().setAll(pane);
-
-
+        myController.setScreen(Main.screen1ID);
 
 
     }
