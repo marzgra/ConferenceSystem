@@ -83,7 +83,7 @@ public class Server {
         return instance;
     }
 
-    public static Uzytkownik getUserInstance(){
+    public static Uzytkownik getUserInstance() {
         return user;
     }
 
@@ -321,8 +321,6 @@ public class Server {
             System.out.println("modifyUserHaslo error: " + e.getMessage());
         }
     }
-
-
 
 
 }
