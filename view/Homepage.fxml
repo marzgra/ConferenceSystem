@@ -12,11 +12,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="614.0" maxWidth="900.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<AnchorPane fx:id="rootPane" maxHeight="614.0" maxWidth="900.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
     <children>
         <Pane cache="true" prefHeight="150.0" prefWidth="900.0" style="-fx-background-color: #071b3a;">
             <children>
-                <Button layoutX="45.0" layoutY="98.0" mnemonicParsing="false" onAction="#onClickWyszukaj" prefHeight="47.0" prefWidth="271.0" style="-fx-background-color: #071b3a;" text="WYSZUKAJ KONFERENCJE" textFill="#f8f6f6">
+                <Button layoutX="45.0" layoutY="98.0" mnemonicParsing="false" onAction="#onClickWyszukaj" prefHeight="47.0" prefWidth="271.0" style="-fx-background-color: #071b3a;" text="WYSZUKAJ KONFERENCJE" textFill="#b8bce1">
                <font>
                   <Font name="SansSerif Bold" size="18.0" />
                </font></Button>
@@ -25,12 +25,12 @@
                         <Image url="@../images/Login.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="zalogujSie" layoutX="356.0" layoutY="105.0" mnemonicParsing="false" onAction="#onClickZaloguj" prefHeight="33.0" prefWidth="138.0" style="-fx-background-color: #071b3a;" text="LOGOWANIE" textFill="#f8f6f6">
+                <Button fx:id="zalogujSie" layoutX="356.0" layoutY="105.0" mnemonicParsing="false" onAction="#onClickZaloguj" prefHeight="33.0" prefWidth="138.0" style="-fx-background-color: #071b3a;" text="LOGOWANIE" textFill="#b8bce1">
                     <font>
                         <Font name="SansSerif Bold" size="18.0" />
                     </font>
                 </Button>
-                <Button fx:id="zapiszSie" cache="true" depthTest="ENABLE" layoutX="535.0" layoutY="98.0" mnemonicParsing="false" onAction="#onClickZapisz" prefHeight="47.0" prefWidth="150.0" style="-fx-background-color: #071b3a;" text="NOWE KONTO" textFill="#f8f6f6">
+                <Button fx:id="zapiszSie" cache="true" depthTest="ENABLE" layoutX="535.0" layoutY="98.0" mnemonicParsing="false" onAction="#onClickZapisz" prefHeight="47.0" prefWidth="150.0" style="-fx-background-color: #071b3a;" text="NOWE KONTO" textFill="#b8bce1">
                     <font>
                         <Font name="SansSerif Bold" size="18.0" />
                     </font>
@@ -40,12 +40,12 @@
                         <Image url="@../images/registration.png" />
                     </image>
                 </ImageView>
-            <Text fill="#f8f6f6" layoutX="60.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KONFERENCJE" wrappingWidth="592.25">
+            <Text fill="#b8bce1" layoutX="53.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KONFERENCJE" wrappingWidth="592.25">
                <font>
                   <Font name="Garamond Bold" size="72.0" />
                </font>
             </Text>
-            <Button fx:id="eksportPDF" layoutX="696.0" layoutY="105.0" mnemonicParsing="false" onAction="#eksportPDF" prefHeight="33.0" prefWidth="190.0" style="-fx-background-color: #071b3a;" text="EKSPORT DO PDF" textFill="#ddd7d7">
+            <Button fx:id="eksportPDF" layoutX="696.0" layoutY="105.0" mnemonicParsing="false" onAction="#eksportPDF" prefHeight="33.0" prefWidth="190.0" style="-fx-background-color: #071b3a;" text="EKSPORT DO PDF" textFill="#b8bce1">
                <font>
                   <Font name="SansSerif Bold" size="18.0" />
                </font></Button>
@@ -58,11 +58,11 @@
                   <Font size="24.0" />
                </font>
             </Label>
-                <TableView fx:id="conferenceTableView" layoutX="15.0" layoutY="139.0" prefHeight="313.0" prefWidth="874.0">
+                <TableView fx:id="conferenceTableView" layoutX="15.0" layoutY="139.0" prefHeight="289.0" prefWidth="874.0">
                     <columns>
-                        <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Nazwa" />
-                        <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Data" />
-                        <TableColumn fx:id="descColumn" prefWidth="75.0" text="Opis" />
+                        <TableColumn fx:id="nameColumn" prefWidth="75.0" text="NAZWA" />
+                        <TableColumn fx:id="dateColumn" prefWidth="75.0" text="DATA" />
+                        <TableColumn fx:id="descColumn" prefWidth="75.0" text="OPIS" />
                         <TableColumn fx:id="categoryColumn" prefWidth="204.0" />
 
                     </columns>

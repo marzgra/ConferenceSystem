@@ -34,11 +34,11 @@ public class OrganiserMyAccountController implements Initializable, ControlledSc
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-//        if(Server.getInstance().czyOrganizatorUczPrelegent("UCZESTNIK",Server.getUserInstance().getId()))
+//        if(Server.getInstance().userType("UCZESTNIK",Server.getUserInstance().getId()))
 //        mojeKonferencje.setText("MOJE KONFERENCJE");
-//           if(Server.getInstance().czyOrganizatorUczPrelegent("ORGANIZATOR",Server.getUserInstance().getId()))
+//           if(Server.getInstance().userType("ORGANIZATOR",Server.getUserInstance().getId()))
 //               mojeKonferencje.setText("MOJE KONFERENCJE");
-//     if(Server.getInstance().czyOrganizatorUczPrelegent("PRELEGENT",Server.getUserInstance().getId()))
+//     if(Server.getInstance().userType("PRELEGENT",Server.getUserInstance().getId()))
 //         mojeKonferencje.setText("MOJE ZGLOSZENIA");
 
 

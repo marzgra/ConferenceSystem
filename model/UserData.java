@@ -15,6 +15,7 @@ public class UserData {
     private String imie;
     private String nazwisko;
     private String tresc;
+    private int id;
     List<UserData> userData;
 
 
@@ -42,6 +43,20 @@ public class UserData {
         this.nazwaKonferencji = nazwaKonferencji;
         this.login = login;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public UserData(String nazwaKonferencji, String login, double kwota, int status, int id) {
+        this.status = status;
+        this.kwota = kwota;
+        this.nazwaKonferencji = nazwaKonferencji;
+        this.login = login;
+        this.id=id;
+
+    }
+
 
     public UserData(String nazwaKonferencji, String temat, int status) {
         this.status = status;

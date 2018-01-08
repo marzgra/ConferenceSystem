@@ -73,17 +73,29 @@ public class AssessmentConferenceController implements Initializable, Controlled
     }
 
     public void przeslijKonferencja(ActionEvent actionEvent) {
-        System.out.println(ocenaK.getValue());
+
+        Conference conf =assessmentTable.getSelectionModel().getSelectedItem();
+        int ocena=Integer.parseInt((ocenaK.getValue().toString()));
+
+        Server.getInstance().addConferenceMark(conf.getId(),Server.getUserInstance().getId(),ocena);
     }
 
     public void przeslijMiejsce(ActionEvent actionEvent) {
-        System.out.println(ocenaM.getValue());
+        Conference conf =assessmentTable.getSelectionModel().getSelectedItem();
+        int ocena=Integer.parseInt(ocenaM.getValue().toString());
+
+        System.out.println(ocena);
+        Server.getInstance().addLocationMark(conf.getName(),Server.getUserInstance().getId(),ocena);
+
     }
 
     public void przeslijPrelegent(ActionEvent actionEvent) {
+
+        String imieP=imie.getText();
+                String nazwiskoP=nazwisko.getText();
+        Conference conf =assessmentTable.getSelectionModel().getSelectedItem();
+        int ocena=Integer.parseInt(ocenaP.getValue().toString());
         System.out.println(ocenaP.getValue());
-        imie.getText();
-        nazwisko.getText();
-        //insert id_u id_konf ocena
+        Server.getInstance().addLecturerMark(imieP,nazwiskoP,Server.getUserInstance().getId(),ocena);
     }
 }

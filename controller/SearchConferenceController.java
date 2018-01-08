@@ -16,6 +16,7 @@ import model.Conference;
 import model.Server;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class SearchConferenceController implements Initializable, ControlledScreen {
@@ -57,9 +58,9 @@ public class SearchConferenceController implements Initializable, ControlledScre
 
 
     public void onClickBack(ActionEvent actionEvent) {
-//        if(Server.getUserInstance().getId()>0)
-//            myController.setScreen(Main.screen5ID);
-//        else
+        if(Server.getUserInstance().getId()>0)
+            myController.setScreen(Main.screen5ID);
+        else
         myController.setScreen(Main.screen1ID);
 
         //odac zalogowani niezalogowani
@@ -95,9 +96,14 @@ public class SearchConferenceController implements Initializable, ControlledScre
     public void wyszukajPoDacie(ActionEvent actionEvent) {
         Server.getConferenceInstance().getConferences().removeAll(Server.getConferenceInstance().getConferences());
         ObservableList<Conference> dane = FXCollections.observableArrayList();
-        System.out.println(dataOd.getConverter());
 
-        if (Server.getInstance().searchOrganiser(dataOd.toString(), dataDo.toString()))
+        LocalDate dataRozpoczecia = dataOd.getValue();
+        LocalDate datazakonczenia=dataDo.getValue();
+
+        System.out.println(dataRozpoczecia);
+        System.out.println(datazakonczenia);
+
+        if (Server.getInstance().searchDate(dataRozpoczecia.toString(), datazakonczenia.toString()))
             for (Conference x : Server.getConferenceInstance().getConferences()) {
                 dane.add(new Conference(x.getId(), x.getName(), x.getDescription()));
 

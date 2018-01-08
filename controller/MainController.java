@@ -95,15 +95,18 @@ public class MainController implements Initializable, ControlledScreen {
                 @Override
                 public TableCell<Conference, Boolean> call(final TableColumn<Conference, Boolean> param) {
                     final TableCell<Conference, Boolean> cell = new TableCell<Conference, Boolean>() {
+
                         Image imgEdit = new Image(getClass().getResourceAsStream("/images/About_26px.png"));
                         final Button btnEdit = new Button();
 
                         @Override
                         public void updateItem(Boolean check, boolean empty) {
                             super.updateItem(check, empty);
+
                             Server.getConferenceInstance().getConferences().removeAll(Server.getConferenceInstance().getConferences());
                             if (Server.getInstance().getConferenceInfo())
-                            if (empty) {
+
+                                if (empty) {
                                 setGraphic(null);
                                 setText(null);
                             } else {
@@ -112,7 +115,8 @@ public class MainController implements Initializable, ControlledScreen {
                                     System.out.println("akcja!!" + selectdIndex);
                                     opisKonf.setText(Server.getConferenceInstance().getConferences().get(selectdIndex).getDescription());
                                     tematKonf.setText(Server.getConferenceInstance().getConferences().get(selectdIndex).getName());
-                                   // System.out.println(Server.getConferenceInstance().getConferences().get(1).toString());
+
+                                    // System.out.println(Server.getConferenceInstance().getConferences().get(1).toString());
                                    // System.out.println(Server.getConferenceInstance().getConferences().get(1).toString());
                                    // System.out.println(Server.getConferenceInstance().getConferences().get(2).toString());
                                   //  System.out.println(Server.getConferenceInstance().getConferences().get(3).toString());

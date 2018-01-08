@@ -14,14 +14,14 @@
     <children>
         <Pane prefHeight="174.0" prefWidth="902.0" style="-fx-background-color: #071b3a;">
             <children>
-                <Text fill="#d3d1d1" layoutX="26.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UCZESTNICY MOICH KONFERENCJI" wrappingWidth="556.384765625">
+                <Text fill="#b8bce1" layoutX="26.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UCZESTNICY MOICH KONFERENCJI" wrappingWidth="556.384765625">
                     <font>
                         <Font name="Cambria Bold" size="55.0" />
                     </font>
                 </Text>
             </children>
         </Pane>
-        <Pane layoutX="-1.0" layoutY="174.0" prefHeight="430.0" prefWidth="902.0" style="-fx-background-color: #96846d;">
+        <Pane layoutY="174.0" prefHeight="430.0" prefWidth="902.0" style="-fx-background-color: #96846d;">
             <children>
                 <TableView fx:id="UserTable" layoutX="50.0" layoutY="158.0" prefHeight="258.0" prefWidth="756.0">
                     <columns>
@@ -36,7 +36,13 @@
                         <Image url="@../images/zgloszenia.jpg" />
                     </image>
                 </ImageView>
-            <Button layoutX="826.0" layoutY="384.0" mnemonicParsing="false" onAction="#onClickBack" text="Powrót" />
+            <Button layoutX="618.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClickBack" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #b8bce1;" text="POWRÓT" />
+            <Button layoutX="445.0" layoutY="115.0" mnemonicParsing="false" onAction="#pokaz" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #b8bce1;" text="POKAŻ" />
+            <Text layoutX="31.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kliknij POKAŻ by dowiedzieć się ile uczestników zapisało się na twoje konferencje i czy zapłacili konieczne należności, jeśli kwota zgadza się z wymaganiem zatwierdź klikając przycisk." wrappingWidth="389.197265625">
+               <font>
+                  <Font name="SansSerif Regular" size="18.0" />
+               </font>
+            </Text>
             </children>
         </Pane>
     </children>

@@ -47,11 +47,11 @@ public class LogInController implements Initializable, ControlledScreen {
         if (znaleziono == true) {
             myController.setScreen(Main.screen5ID);
             //jak się zalogują mają ten sam panel
-//            if(Server.getInstance().czyOrganizatorUczPrelegent("UCZESTNIK",Server.getUserInstance().getId()))
+//            if(Server.getInstance().userType("UCZESTNIK",Server.getUserInstance().getId()))
 //            {myController.setScreen(Main.screen5ID);}
-//            else if(Server.getInstance().czyOrganizatorUczPrelegent("ORGANIZATOR",Server.getUserInstance().getId()))
+//            else if(Server.getInstance().userType("ORGANIZATOR",Server.getUserInstance().getId()))
 //            {  myController.setScreen(Main.screen5ID);}
-//              else if(Server.getInstance().czyOrganizatorUczPrelegent("PRELEGENT",Server.getUserInstance().getId()))
+//              else if(Server.getInstance().userType("PRELEGENT",Server.getUserInstance().getId()))
 //            { myController.setScreen(Main.screen5ID);}
         } else {
             System.out.println("Nie wchodzimy");

@@ -2,6 +2,8 @@ package model;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
 
@@ -13,6 +15,7 @@ public class Server {
     private static final String TABELA_UCZESTNIK = "UCZESTNIK";
     private static final String TABELA_PRELEGENT = "PRELEGENT";
     private static final String TABELA_ORGANIZATOR = "ORGANIZATOR";
+    private static final String TABELA_KONFERENCJE = "KONFERENCJA"; //zamienilam‚am E na A
     private static final String KOLUMNA_ID_UZYTKOWNIK = "ID_UZYTKOWNIK";
     private static final String KOLUMNA_ID_UCZESTNIK = "ID_UCZESTNIK";
     private static final String KOLUMNA_ID_ORGANIZATOR = "ID_ORGANIZATOR";
@@ -60,10 +63,70 @@ public class Server {
     private static final String ZMIEN_MIEJSCOWOSC = "UPDATE " + TABELA_UZYTKOWNIK + " SET "
             + KOLUMNA_MIEJSCOWOSC + " = ? WHERE " + KOLUMNA_LOGIN + " = ?";
 
+    private static final String NOWA_KONFERENCJA = "INSERT INTO " + TABELA_KONFERENCJE
+            + "() VALUES"
+            + "(?, ?, ?, ?, ?, ?, ?)";
+
+    private static final String DANE_KONFERENCJI = "SELECT ID_KONFERENCJA,DATA_ROZPOCZECIA,OPIS,NAZWA" + " FROM "
+            + TABELA_KONFERENCJE;
+
+    private static final String MIEJSCOWOSC_KONFERENCJI = "SELECT ID_KONFERENCJA, NAZWA, OPIS from KONFERENCJA" +
+            "  WHERE  KONFERENCJA.ID_MIEJSCE in (SELECT MIEJSCE.ID_MIEJSCE from MIEJSCE WHERE MIEJSCOWOSC=" + "?" + " )";
+
+    private static final String ORGANIZATOR_KONFERENCJI = "SELECT ID_KONFERENCJA,  NAZWA, OPIS from KONFERENCJA  join " +
+            "UZYTKOWNIK on  UZYTKOWNIK.ID_UZYTKOWNIK=KONFERENCJA.ID_ORGANIZATOR  where imie=" + "?" + " and nazwisko=" + "?";
+
+    private static final String PRELEGENT_KONFERENCJI = "SELECT ID_KONFERENCJA, KONFERENCJA.NAZWA, KONFERENCJA.OPIS " +
+            "from KONFERENCJA where KONFERENCJA.ID_KONFERENCJA in(SELECT WYKLAD.ID_KONFERENCJA from WYKLAD where" +
+            " WYKLAD.ID_WYKLAD  in (SELECT ZGLOSZENIE.ID_WYKLAD from ZGLOSZENIE  where" +
+            " ZGLOSZENIE.ID_PRELEGENT in (SELECT PRELEGENT.ID_PRELEGENT from PRELEGENT where PRELEGENT.ID_PRELEGENT in" +
+            " (SELECT UZYTKOWNIK.ID_UZYTKOWNIK from  UZYTKOWNIK  where imie=" + "?" + " and nazwisko=" + "?" + "))))";
+
+    private static final String DATA_OD_DO_KONFERENCJE = "SELECT ID_KONFERENCJA, NAZWA, OPIS from KONFERENCJA" +
+            " WHERE DATA_ROZPOCZECIA BETWEEN " + "?" + " and " + "?";
+
+    private static final String UZYTKOWNIK_PRELEGENT = "SELECT ID_UZYTKOWNIK FROM UZYTKOWNIK " +
+            "WHERE ID_UZYTKOWNIK IN ( SELECT ID_PRELEGENT FROM PRELEGENT WHERE ID_PRELEGENT=" + "?" + " )";
+
+    private static final String UZYTKOWNIK_UCZESTNIK = "SELECT ID_UZYTKOWNIK FROM UZYTKOWNIK WHERE ID_UZYTKOWNIK IN" +
+            " ( SELECT ID_UCZESTNIK FROM UCZESTNIK WHERE ID_UCZESTNIK=" + "?" + " )";
+
+    private static final String UZYTKOWNIK_ORGANIZATOR = "SELECT ID_UZYTKOWNIK FROM UZYTKOWNIK WHERE" +
+            " ID_UZYTKOWNIK IN ( SELECT ID_ORGANIZATOR FROM ORGANIZATOR WHERE ID_ORGANIZATOR=" + "?" + " )";
+
+    private static final String POBIERZ_DANE_PLATNOSC =" SELECT KONFERENCJA.NAZWA,UZYTKOWNIK.LOGIN,PLATNOSC.KWOTA, " +
+            "PLATNOSC.STATUS,PLATNOSC.ID_UZYTKOWNIK from  PLATNOSC join KONFERENCJA on" +
+            " KONFERENCJA.ID_KONFERENCJA=PLATNOSC.ID_KONFERENCJA join UZYTKOWNIK on UZYTKOWNIK.ID_UZYTKOWNIK=PLATNOSC.ID_UZYTKOWNIK" +
+            " WHERE KONFERENCJA.ID_ORGANIZATOR = " + " ?";
+
+    private static final String POBIERZ_DANE_ZGLOSZENIA = "select KONFERENCJA.NAZWA, ZGLOSZENIE.TEMAT,ZGLOSZENIE.STATUS " +
+            "from ZGLOSZENIE join WYKLAD ON ZGLOSZENIE.ID_WYKLAD=WYKLAD.ID_WYKLAD join KONFERENCJA on " +
+            "WYKLAD.ID_KONFERENCJA=KONFERENCJA.ID_KONFERENCJA where ZGLOSZENIE.ID_PRELEGENT=" + "?";
+
+    private static final String POBIERZ_DANE_KONFERENCJE = "SELECT   KONFERENCJA.NAZWA, KONFERENCJA.DATA_ROZPOCZECIA, " +
+    "MIEJSCE.MIEJSCOWOSC, PLATNOSC.STATUS from KONFERENCJA  JOIN MIEJSCE on KONFERENCJA.ID_MIEJSCE=MIEJSCE.ID_MIEJSCE " +
+    "join PLATNOSC on KONFERENCJA.ID_KONFERENCJA=PLATNOSC.ID_KONFERENCJA " +
+    "JOIN UZYTKOWNIK ON PLATNOSC.ID_UZYTKOWNIK=UZYTKOWNIK.ID_UZYTKOWNIK where UZYTKOWNIK.ID_UZYTKOWNIK=" + " ? ";
+
+    private static final String MINIONE_KONFERENCJE = "SELECT KONFERENCJA.ID_KONFERENCJA," +
+            "KONFERENCJA.NAZWA, KONFERENCJA.OPIS from KONFERENCJA WHERE DATA_ZAKONCZENIA<CURRENT_DATE";
+
+    private static final String POTWIERDZENIE_PLATNOSCI = "UPDATE PLATNOSC SET STATUS = "+"?"+" where ID_UZYTKOWNIK =" + "?";
+
+    private static final String DODAJ_OCENE_MIEJSCA = "INSERT INTO OCENA_MIEJSCA(ID_MIEJSCA," +
+            " ID_UZYTKOWNIKA,OCENA) VALUES(" + "?" + "," + "?" + "," + "?" + ")";
+
+    private static final String DODAJ_OCENE_KONFERENCJI = "INSERT INTO OCENA_KONFERENCJI(ID_KONFERENCJA," +
+            " ID_UZYTKOWNIKA,OCENA) VALUES(" + "?" + "," + "?" + "," + "?" + ")";
+
+    private static final String DODAJ_OCENE_PRELEGENTA = "INSERT INTO OCENA_PRELEGENTA(ID_PRELEGENTA," +
+            " ID_UZYTKOWNIKA,OCENA) VALUES(" + "?" + "," + "?" + "," + "?" + ")";
+
     private Connection connection;
 
     private static Uzytkownik user;
-
+    private static Conference conference;
+    private static UserData userData;
     /***
      * lazy initialization - instance of this class won't be created, until
      * the first time other class calls the getInstance method
@@ -87,6 +150,17 @@ public class Server {
         return user;
     }
 
+    public static Conference getConferenceInstance() {
+        return conference;
+    }
+
+    public static UserData getUserDataInstance() {
+        return userData;
+    }
+
+    List<Conference> conferences = new ArrayList<Conference>();
+
+    List<UserData> userDataList = new ArrayList<UserData>();
     public boolean open() {
 
         try {
@@ -216,7 +290,7 @@ public class Server {
                 return true;
 
             } catch (SQLException e) {
-                System.out.println("inserUser: nie dodano użytkownika: " + e.getMessage());
+                System.out.println("inserUser: nie dodano uĹĽytkownika: " + e.getMessage());
                 return false;
             }
         }
@@ -255,7 +329,7 @@ public class Server {
                 System.out.println(user.toString());
                 return true;
             }
-            System.out.println("Logowanie: niepoprawne hasło.");
+            System.out.println("Logowanie: niepoprawne hasĹ‚o.");
             return false;
         } catch (SQLException e) {
             System.out.println("Logowanie error: " + e.getMessage());
@@ -322,7 +396,445 @@ public class Server {
         }
     }
 
+    /**
+     * conference information
+     * @return true if are information about conference
+     */
+    public boolean getConferenceInfo() {
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(DANE_KONFERENCJI);
 
 
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                conferences.add(new Conference(
+                       resultSet.getInt(1),
+                        resultSet.getDate(2),
+                        resultSet.getString(3),
+                         resultSet.getString(4))
+                );
+
+
+            }
+            if (!conferences.isEmpty()) {
+                conference = new Conference(conferences);
+                return true;
+            }
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * conference information about location
+     *@param miejscowosc conference location
+     * @return true if there is information about the conference
+     */
+
+    public boolean searchLocation(String miejscowosc) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(MIEJSCOWOSC_KONFERENCJI);
+            statement.setString(1, miejscowosc);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                conferences.add(new Conference(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3)));
+
+
+            }
+            if (!conferences.isEmpty()) {
+                conference = new Conference(conferences);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+
+    /**
+     * search Organiser of conference
+     *@param imie Organiser name
+     *@param nazwisko Organiser surname
+     * @return true if there is information about organiser
+     */
+
+    public boolean searchOrganiser(String imie, String nazwisko) {
+        PreparedStatement statement = null;
+        try {
+
+            statement = connection.prepareStatement(ORGANIZATOR_KONFERENCJI);
+            statement.setString(1, imie);
+            statement.setString(2, nazwisko);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                conferences.add(new Conference(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3)));
+
+
+            }
+            if (!conferences.isEmpty()) {
+                conference = new Conference(conferences);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * search Lecturer of conference
+     *@param imie Lecturer name
+     *@param nazwisko Lecturer surname
+     * @return true if there is information about lecturer
+     */
+    public boolean searchLecturer(String imie, String nazwisko) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(PRELEGENT_KONFERENCJI);
+            statement.setString(1, imie);
+            statement.setString(2, nazwisko);
+            int i;
+            String c, d;
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                conferences.add(new Conference(
+                        i = resultSet.getInt(1),
+                        c = resultSet.getString(2),
+                        d = resultSet.getString(3)));
+
+                System.out.print(i + c + d);
+
+            }
+            if (!conferences.isEmpty()) {
+                conference = new Conference(conferences);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * search date of conference
+     *@param dataDo start date
+     *@param dataOd end date
+     * @return true if there is information about date of conference
+     */
+    public boolean searchDate(String dataOd, String dataDo) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(DATA_OD_DO_KONFERENCJE);
+            statement.setString(1, dataOd);
+            statement.setString(2, dataDo);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                conferences.add(new Conference(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3)));
+
+
+            }
+            if (!conferences.isEmpty()) {
+                conference = new Conference(conferences);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * @param postac type of user currently logged in
+     * @param id     user currently logged in
+     * @return true if there is information about person
+     */
+    public boolean userType(String postac, int id) {
+        int x;
+
+        PreparedStatement statement = null;
+        try {
+            if (postac.equals("PRELEGENT")) {
+                statement = connection.prepareStatement(UZYTKOWNIK_PRELEGENT);
+                statement.setInt(1, id);
+            }
+
+            if (postac.equals("ORGANIZATOR")) {
+                statement = connection.prepareStatement(UZYTKOWNIK_ORGANIZATOR);
+                statement.setInt(1, id);
+            }
+
+
+            if (postac.equals("UCZESTNIK")) {
+                statement = connection.prepareStatement(UZYTKOWNIK_UCZESTNIK);
+                statement.setInt(1, id);
+            }
+
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                x = resultSet.getInt(1);
+                System.out.println(x + " id uczestnika");
+                return true;
+            }
+
+
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            System.out.println("nie ma wynikĂłw ");
+        }
+
+        return false;
+    }
+
+
+    /**
+     * information about the participant's payment for conferences
+     * @param id user id
+     * @return true if there is information about payment
+     */
+    public boolean paymentInfo(int id) {
+
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(POBIERZ_DANE_PLATNOSC);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                userDataList.add(new UserData(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getDouble(3),
+                        resultSet.getInt(4),
+                        resultSet.getInt(5)
+                ));
+
+
+            }
+            if (!userDataList.isEmpty()) {
+                userData = new UserData(userDataList);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * information about the Lecturer applications
+     * @param id user currently logged in
+     * @return true if there is information about applications
+     */
+    public boolean applicationInfo(int id) {
+
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(POBIERZ_DANE_ZGLOSZENIA);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                userDataList.add(new UserData(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3)));
+
+
+            }
+            if (!userDataList.isEmpty()) {
+                userData = new UserData(userDataList);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * information about conference and status of payment
+     * @param id user currently logged in
+     * @return true if there is information about applications
+     */
+    public boolean conferenceAndPaymentInfo(int id) {
+
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(POBIERZ_DANE_KONFERENCJE);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                userDataList.add(new UserData(
+                        resultSet.getString(1),
+                        resultSet.getDate(2),
+                        resultSet.getString(3),
+                        resultSet.getInt(4)));
+
+
+            }
+            if (!userDataList.isEmpty()) {
+                userData = new UserData(userDataList);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * information about past conferences
+     * @return true if there is information about conference
+     */
+
+    public boolean pastConferenceInfo() {
+
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(MINIONE_KONFERENCJE);
+
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                conferences.add(new Conference(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3)));
+
+
+            }
+            if (!conferences.isEmpty()) {
+                conference = new Conference(conferences);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    /**
+     * modify payment status
+     *@param id user id
+     */
+    public void modifyUserPayment(int id)
+    {
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(POTWIERDZENIE_PLATNOSCI);
+           statement.setInt(1,1);
+            statement.setInt(2,id);
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(" error: " + e.getMessage());
+        }
+    }
+    /**
+     * add location mark
+     *@param nazwa name of conference
+     *@param id_uzytkownika id user
+     *@param ocena location mark
+     */
+    public void addLocationMark(String nazwa, int id_uzytkownika, int ocena)
+    {
+        int id_miejsca=0;
+        String sql = "SELECT ID_MIEJSCE FROM KONFERENCJA WHERE NAZWA=" + "?";
+        try {
+            PreparedStatement statementUserId = connection.prepareStatement(sql);
+            statementUserId.setString(1,nazwa);
+
+            ResultSet resultSet =statementUserId.executeQuery();
+            if(resultSet.next())
+            id_miejsca= resultSet.getInt(1);
+
+            PreparedStatement statement = connection.prepareStatement(DODAJ_OCENE_MIEJSCA);
+            statement.setInt(1,id_miejsca);
+            statement.setInt(2,id_uzytkownika);
+            statement.setInt(3,ocena);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+    }
+    /**
+     * add conference mark
+     *@param id_konferencji conference id
+     *@param id_uzytkownika id user
+     *@param ocena conference mark
+     */
+    public void addConferenceMark(int id_konferencji, int id_uzytkownika, int ocena)
+    {
+        try {
+            PreparedStatement statement = connection.prepareStatement(DODAJ_OCENE_KONFERENCJI);
+            statement.setInt(1,id_konferencji);
+            statement.setInt(2,id_uzytkownika);
+            statement.setInt(3,ocena);
+
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+    }
+    /**
+     * add lecturer mark
+     *@param imie lecturer name
+     *@param nazwisko lecturer surname             
+     *@param id_uzytkownika id user
+     *@param ocena conference mark
+     */
+    public void addLecturerMark(String imie,String nazwisko,int id_uzytkownika, int ocena)
+    { 
+        int id_prelegenta=0;
+        String sql = "SELECT ID_UZYTKOWNIK FROM UZYTKOWNIK WHERE IMIE= " + " ? "+"AND" + " NAZWISKO = " + " ? ";
+        try {
+            PreparedStatement statementUserId = connection.prepareStatement(sql);
+            statementUserId.setString(1,imie);
+            statementUserId.setString(2,nazwisko);
+
+            ResultSet resultSet =statementUserId.executeQuery();
+            if(resultSet.next())
+           id_prelegenta= resultSet.getInt(1);
+
+            PreparedStatement statement = connection.prepareStatement(DODAJ_OCENE_PRELEGENTA);
+            statement.setInt(1,id_prelegenta);
+            statement.setInt(2,id_uzytkownika);
+            statement.setInt(3,ocena);
+
+
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(" error: " + e.getMessage());
+        }
+
+    }
 
 }

@@ -4,14 +4,11 @@ package controller;
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
 import model.Server;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -57,9 +54,9 @@ public class MyAccountController implements Initializable, ControlledScreen {
     }
 
     public void onClickMojeKonferencje(ActionEvent actionEvent) {
-        if (Server.getInstance().czyOrganizatorUczPrelegent("UCZESTNIK", Server.getUserInstance().getId())) {
+        if (Server.getInstance().userType("UCZESTNIK", Server.getUserInstance().getId())) {
             myController.setScreen(Main.screen11ID);
-        } else if (Server.getInstance().czyOrganizatorUczPrelegent("PRELEGENT", Server.getUserInstance().getId())) {
+        } else if (Server.getInstance().userType("PRELEGENT", Server.getUserInstance().getId())) {
             myController.setScreen(Main.screen8ID);
         }
 
@@ -80,9 +77,9 @@ public class MyAccountController implements Initializable, ControlledScreen {
 
 
     public void onClickWyswietl(ActionEvent actionEvent) {
-        if (Server.getInstance().czyOrganizatorUczPrelegent("UCZESTNIK", Server.getUserInstance().getId())) {
+        if (Server.getInstance().userType("UCZESTNIK", Server.getUserInstance().getId())) {
             mojeKonferencje.setText("Moje konferencje");
-        } else if (Server.getInstance().czyOrganizatorUczPrelegent("PRELEGENT", Server.getUserInstance().getId())) {
+        } else if (Server.getInstance().userType("PRELEGENT", Server.getUserInstance().getId())) {
             mojeKonferencje.setText("Moje zgloszenia");
         }
 
