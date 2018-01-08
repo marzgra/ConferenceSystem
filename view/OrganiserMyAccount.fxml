@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MyAccountController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrganiserMyAccountController">
     <children>
         <Pane prefHeight="150.0" prefWidth="900.0" style="-fx-background-color: #071b3a;">
             <children>
@@ -73,7 +73,9 @@
                         <Image url="@../images/konto-Windows.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="wyswietlDane" layoutX="405.0" layoutY="106.0" mnemonicParsing="false" onAction="#onClickWyswietl" prefHeight="44.0" prefWidth="130.0" style="-fx-background-color: #96846d;" text="Wyświetl moje dane" />
+                <Button layoutX="405.0" layoutY="106.0" mnemonicParsing="false" onAction="#onClickWyswietl" prefHeight="44.0" prefWidth="130.0" style="-fx-background-color: #96846d;" text="Wyświetl moje dane" />
+            <Button onAction="#onZgloszenia" layoutX="429.0" layoutY="400.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Zgłoszenia " />
+            <Button onAction="#onUczestnicy" layoutX="543.0" layoutY="400.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Uczestnicy " />
             </children>
         </Pane>
     </children>

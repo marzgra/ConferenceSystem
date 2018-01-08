@@ -3,26 +3,16 @@ package controller;
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
-
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.Server;
 
-
-import java.io.IOException;
 import java.net.URL;
-
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/**
- * Created by Alicja on 2017-11-11.
- */
+
 public class LogInController implements Initializable, ControlledScreen {
 
 
@@ -56,6 +46,13 @@ public class LogInController implements Initializable, ControlledScreen {
         System.out.println(znaleziono);
         if (znaleziono == true) {
             myController.setScreen(Main.screen5ID);
+            //jak się zalogują mają ten sam panel
+//            if(Server.getInstance().czyOrganizatorUczPrelegent("UCZESTNIK",Server.getUserInstance().getId()))
+//            {myController.setScreen(Main.screen5ID);}
+//            else if(Server.getInstance().czyOrganizatorUczPrelegent("ORGANIZATOR",Server.getUserInstance().getId()))
+//            {  myController.setScreen(Main.screen5ID);}
+//              else if(Server.getInstance().czyOrganizatorUczPrelegent("PRELEGENT",Server.getUserInstance().getId()))
+//            { myController.setScreen(Main.screen5ID);}
         } else {
             System.out.println("Nie wchodzimy");
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,

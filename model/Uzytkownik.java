@@ -24,7 +24,7 @@ public class Uzytkownik {
         this.miejscowosc = miejscowosc;
     }
 
-    int getId() {
+    public int getId() {
         return id;
     }
 

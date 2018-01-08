@@ -10,9 +10,7 @@ import model.Server;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by Alicja on 2017-11-26.
- */
+
 public class EditAccountController implements Initializable, ControlledScreen {
 
     @FXML
