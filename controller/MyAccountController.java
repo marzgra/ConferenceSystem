@@ -83,4 +83,3 @@ public class MyAccountController implements Initializable, ControlledScreen {
         emailText.setText(Server.getUserInstance().getEmail());
     }
 }
-

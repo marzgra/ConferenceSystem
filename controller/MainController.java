@@ -38,5 +38,3 @@ public class MainController implements Initializable, ControlledScreen {
 
     }
 }
-
-

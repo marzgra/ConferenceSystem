@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #96846d;"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewConference">x
+
+    <Pane prefHeight="600.0" prefWidth="450.0" style="-fx-background-color: #071b3a;">
+        <ImageView fitHeight="300.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../images/conference-room-768441_1920.jpg"/>
+        </ImageView>
+        <Text fill="#b8bce1" layoutX="72.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Podaj dane konferencji:" textAlignment="CENTER">
+            <font>
+                <Font name="Arial Bold" size="28.0"/>
+            </font>
+        </Text>
+    </Pane>
+
+
+    <Pane layoutX="450.0" prefHeight="600.0" prefWidth="450.0">
+        <TextField layoutX="225.0" layoutY="70.0" text="Nazwa"/>
+        <ChoiceBox layoutX="224.0" layoutY="127.0" prefWidth="150.0"/>
+        <TextArea layoutX="224.0" layoutY="300.0" prefHeight="200.0" prefWidth="200.0" text="Opis&#10;"/>
+        <DatePicker layoutX="225.0" layoutY="179.0"/>
+        <DatePicker layoutX="225.0" layoutY="239.0"/>
+        <Text layoutX="95.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa Konferencji"/>
+        <Text layoutX="95.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miejsce"/>
+        <Text layoutX="95.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data rozpoczęcia"/>
+        <Text layoutX="95.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data zakończenia"/>
+        <Text layoutX="95.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opis wydarzenia"/>
+        <Button layoutX="269.0" layoutY="544.0" mnemonicParsing="false" text="Dodaj wydarzenie"/>
+    </Pane>
+</AnchorPane>
