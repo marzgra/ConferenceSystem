@@ -146,6 +146,8 @@ public class Server {
             + "(SELECT ID_KONFERENCJA FROM KONFERENCJA WHERE NAZWA = ?) AND DATA_ROZPOCZECIA > CURRENT_DATE";
 
 
+
+
     private Connection connection;
 
     private static Uzytkownik user;
@@ -1066,4 +1068,7 @@ public class Server {
     }
 
 
+    public void signToConference(int idKonferencji) {
+        // todo weź udział
+    }
 }

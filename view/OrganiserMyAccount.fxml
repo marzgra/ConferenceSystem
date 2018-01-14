@@ -9,74 +9,97 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrganiserMyAccountController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrganiserMyAccountController">
     <children>
         <Pane prefHeight="150.0" prefWidth="900.0" style="-fx-background-color: #071b3a;">
             <children>
-                <Label layoutX="61.0" layoutY="43.0" prefHeight="67.0" prefWidth="454.0" text="MOJE KONTO" textFill="WHITE">
+                <Label layoutX="61.0" layoutY="43.0" prefHeight="67.0" prefWidth="454.0" text="MOJE KONTO"
+                       textFill="WHITE">
                     <font>
-                        <Font size="58.0" />
+                        <Font size="58.0"/>
                     </font>
                 </Label>
             </children>
         </Pane>
         <Pane layoutY="150.0" prefHeight="450.0" prefWidth="900.0" style="-fx-background-color: #c1b4a2;">
             <children>
-                <TextField fx:id="nameText" editable="false" layoutX="201.0" layoutY="108.0" prefHeight="33.0" prefWidth="196.0" />
+                <TextField fx:id="nameText" editable="false" layoutX="201.0" layoutY="108.0" prefHeight="33.0"
+                           prefWidth="196.0"/>
                 <Label layoutX="114.0" layoutY="106.0" prefHeight="26.0" prefWidth="76.0" text="Imię">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
-                <TextField fx:id="surnameText" editable="false" layoutX="201.0" layoutY="155.0" prefHeight="33.0" prefWidth="196.0" />
+                <TextField fx:id="surnameText" editable="false" layoutX="201.0" layoutY="155.0" prefHeight="33.0"
+                           prefWidth="196.0"/>
                 <Label layoutX="68.0" layoutY="153.0" prefHeight="35.0" prefWidth="122.0" text="Nazwisko">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
-                <TextField fx:id="loginText" editable="false" layoutX="201.0" layoutY="203.0" prefHeight="33.0" prefWidth="196.0" />
+                <TextField fx:id="loginText" editable="false" layoutX="201.0" layoutY="203.0" prefHeight="33.0"
+                           prefWidth="196.0"/>
                 <Label layoutX="107.0" layoutY="201.0" prefHeight="35.0" prefWidth="83.0" text="Login">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
-                <TextField fx:id="passwordText" editable="false" layoutX="201.0" layoutY="252.0" prefHeight="33.0" prefWidth="196.0" />
+                <TextField fx:id="passwordText" editable="false" layoutX="201.0" layoutY="252.0" prefHeight="33.0"
+                           prefWidth="196.0"/>
                 <Label layoutX="107.0" layoutY="250.0" prefHeight="35.0" prefWidth="83.0" text="Hasło">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
-                <TextField fx:id="emailText" editable="false" focusTraversable="false" layoutX="201.0" layoutY="306.0" prefHeight="33.0" prefWidth="196.0" />
+                <TextField fx:id="emailText" editable="false" focusTraversable="false" layoutX="201.0" layoutY="306.0"
+                           prefHeight="33.0" prefWidth="196.0"/>
                 <Label layoutX="97.0" layoutY="304.0" prefHeight="35.0" prefWidth="93.0" text="e-mail">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
-                <TextField fx:id="countryText" editable="false" layoutX="201.0" layoutY="358.0" prefHeight="33.0" prefWidth="196.0" />
+                <TextField fx:id="countryText" editable="false" layoutX="201.0" layoutY="358.0" prefHeight="33.0"
+                           prefWidth="196.0"/>
                 <Label layoutX="44.0" layoutY="356.0" prefHeight="35.0" prefWidth="146.0" text="Miejscowość">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
-                <TextField fx:id="personText" layoutX="299.0" layoutY="1.0" onAction="#onClickWyswietl" prefHeight="44.0" prefWidth="294.0" style="-fx-background-color: #c1b4a2;" />
+                <TextField fx:id="personText" layoutX="299.0" layoutY="1.0" onAction="#onClickWyswietl"
+                           prefHeight="44.0" prefWidth="294.0" style="-fx-background-color: #c1b4a2;"/>
                 <Label layoutX="44.0" layoutY="14.0" prefHeight="35.0" prefWidth="274.0" text="Jesteś zalogowany jako">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
-                <Button fx:id="usun" layoutX="429.0" layoutY="357.0" mnemonicParsing="false" onAction="#onClickUsunKonto" prefHeight="35.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Usuń konto" />
-                <Button fx:id="edytuj" layoutX="543.0" layoutY="356.0" mnemonicParsing="false" onAction="#onClickEdytujDane" prefHeight="35.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Edytuj dane" />
-                <Button fx:id="powrot" layoutX="780.0" layoutY="356.0" mnemonicParsing="false" onAction="#onClickPowrot" prefHeight="35.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Powrót" />
-                <Button fx:id="mojeKonferencje" layoutX="657.0" layoutY="357.0" mnemonicParsing="false" onAction="#onClickMojeKonferencje" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #96846d;" text="Moje konferencje" />
-                <ImageView fitHeight="287.0" fitWidth="286.0" layoutX="514.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                <Button fx:id="usun" layoutX="429.0" layoutY="357.0" mnemonicParsing="false"
+                        onAction="#onClickUsunKonto" prefHeight="35.0" prefWidth="106.0"
+                        style="-fx-background-color: #96846d;" text="Usuń konto"/>
+                <Button fx:id="edytuj" layoutX="543.0" layoutY="356.0" mnemonicParsing="false"
+                        onAction="#onClickEdytujDane" prefHeight="35.0" prefWidth="106.0"
+                        style="-fx-background-color: #96846d;" text="Edytuj dane"/>
+                <Button fx:id="powrot" layoutX="780.0" layoutY="356.0" mnemonicParsing="false" onAction="#onClickPowrot"
+                        prefHeight="35.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Powrót"/>
+                <Button fx:id="mojeKonferencje" layoutX="657.0" layoutY="357.0" mnemonicParsing="false"
+                        onAction="#onClickMojeKonferencje" prefHeight="35.0" prefWidth="115.0"
+                        style="-fx-background-color: #96846d;" text="Moje konferencje"/>
+                <ImageView fitHeight="287.0" fitWidth="286.0" layoutX="514.0" layoutY="28.0" pickOnBounds="true"
+                           preserveRatio="true">
                     <image>
-                        <Image url="@../images/konto-Windows.png" />
+                        <Image url="@../images/konto-Windows.png"/>
                     </image>
                 </ImageView>
-                <Button layoutX="405.0" layoutY="106.0" mnemonicParsing="false" onAction="#onClickWyswietl" prefHeight="44.0" prefWidth="130.0" style="-fx-background-color: #96846d;" text="Wyświetl moje dane" />
-            <Button layoutX="429.0" layoutY="400.0" mnemonicParsing="false" onAction="#onZgloszenia" prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Zgłoszenia " />
-            <Button layoutX="543.0" layoutY="400.0" mnemonicParsing="false" onAction="#onUczestnicy" prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Uczestnicy " />
-            <Button layoutX="657.0" layoutY="400.0" mnemonicParsing="false" onAction="#nowaKonferencja" prefHeight="44.0" prefWidth="115.0" style="-fx-background-color: #96846d;" text="Nowa konferencja" />
+                <Button layoutX="405.0" layoutY="106.0" mnemonicParsing="false" onAction="#onClickWyswietl"
+                        prefHeight="44.0" prefWidth="130.0" style="-fx-background-color: #96846d;"
+                        text="Wyświetl moje dane"/>
+                <Button layoutX="429.0" layoutY="400.0" mnemonicParsing="false" onAction="#onZgloszenia"
+                        prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Zgłoszenia "/>
+                <Button layoutX="543.0" layoutY="400.0" mnemonicParsing="false" onAction="#onUczestnicy"
+                        prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Uczestnicy "/>
+                <Button layoutX="657.0" layoutY="400.0" mnemonicParsing="false" onAction="#nowaKonferencja"
+                        prefHeight="44.0" prefWidth="115.0" style="-fx-background-color: #96846d;"
+                        text="Nowa konferencja"/>
             </children>
         </Pane>
     </children>

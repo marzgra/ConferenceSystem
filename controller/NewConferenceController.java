@@ -78,7 +78,7 @@ public class NewConferenceController implements Initializable, ControlledScreen 
     }
 
     public void powrot(ActionEvent actionEvent) {
-        myController.setScreen(Main.screen6ID);
+        myController.setScreen(Main.screen14ID);
     }
 
 

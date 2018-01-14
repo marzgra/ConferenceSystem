@@ -44,9 +44,6 @@ public class MyConferenceController implements Initializable, ControlledScreen {
     }
 
     public void onPokaz(ActionEvent actionEvent) {
-//        if(Server.getUserDataInstance().getUserData().removeAll(Server.getUserDataInstance().getUserData()))
-//            System.out.println("cos bylo");
-
         ObservableList<UserData> dane = FXCollections.observableArrayList();
 
         if (Server.getInstance().conferenceAndPaymentInfo(Server.getUserInstance().getId()))
@@ -70,7 +67,6 @@ public class MyConferenceController implements Initializable, ControlledScreen {
         countryCol.setCellValueFactory(
                 new PropertyValueFactory<UserData, String>("miejsce")
         );
-
 
         paymentCol.setCellValueFactory(
                 new PropertyValueFactory<UserData, Integer>("status")

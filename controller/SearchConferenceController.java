@@ -62,8 +62,9 @@ public class SearchConferenceController implements Initializable, ControlledScre
         if (Server.getUserInstance() == null) {
             // uzytkownik niezalogowany
             myController.setScreen(Main.screen1ID);
+        }else if(Server.getUserInstance().getTyp() == TypUzytkownika.ORGANIZATOR){
+            myController.setScreen(Main.screen14ID);
         }else{
-            // uzytkownik zalogowany
             myController.setScreen(Main.screen5ID);
         }
     }

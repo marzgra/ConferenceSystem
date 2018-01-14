@@ -58,8 +58,6 @@ public class MyAccountController implements Initializable, ControlledScreen {
         } else if (Server.getInstance().userType("PRELEGENT", Server.getUserInstance().getId())) {
             myController.setScreen(Main.screen8ID);
         }
-
-
     }
 
     public void onClickPowrot(ActionEvent actionEvent) {
