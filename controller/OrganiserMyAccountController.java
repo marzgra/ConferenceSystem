@@ -54,6 +54,7 @@ public class OrganiserMyAccountController implements Initializable, ControlledSc
 
     }
 
+    // TODO nowy pane - moje konferencje organizator
     public void onClickMojeKonferencje(ActionEvent actionEvent) {
 
 
@@ -89,7 +90,11 @@ public class OrganiserMyAccountController implements Initializable, ControlledSc
 
 
     public void onZgloszenia(ActionEvent actionEvent) {
+    // todo nowy panel z tabelą zgłoszeń - mozliwość pobrania odpowiedniego pliku i zmiany statusu (akceptacji)
+    }
 
+    public void nowaKonferencja(ActionEvent actionEvent) {
+        myController.setScreen(Main.screen9ID);
     }
 }
 

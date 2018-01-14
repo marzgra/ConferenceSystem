@@ -24,21 +24,26 @@ public class HomepageOrganizatorController implements Initializable, ControlledS
         myController = screenParent;
     }
 
-
     public void onClickWyloguj(ActionEvent actionEvent) {
         myController.setScreen(Main.screen1ID);
     }
 
     @FXML
     public void onClickMojeKonto(ActionEvent actionEvent) {
-        myController.setScreen(Main.screen4ID);
+        myController.setScreen(Main.screen6ID);
     }
 
     public void onClickDodajKonferencje(ActionEvent actionEvent) {
+        myController.setScreen(Main.screen9ID);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //todo uzupełnić tabelę konferencjami organizatora
 
+    }
+
+    public void onClickSzukaj(ActionEvent actionEvent) {
+        myController.setScreen(Main.screen13ID);
     }
 }

@@ -10,9 +10,10 @@ public class Uzytkownik {
     private String nazwisko;
     private String email;
     private String miejscowosc;
+    private TypUzytkownika typ;
 
     Uzytkownik(int id, String login, String haslo, String imie,
-               String nazwisko, String email, String miejscowosc) {
+               String nazwisko, String email, String miejscowosc, TypUzytkownika typ) {
         this.id = id;
         this.login = login;
         this.haslo = haslo;
@@ -20,13 +21,18 @@ public class Uzytkownik {
         this.nazwisko = nazwisko;
         this.email = email;
         this.miejscowosc = miejscowosc;
+        this.typ = typ;
+    }
+
+    public TypUzytkownika getTyp() {
+        return typ;
     }
 
     public int getId() {
         return id;
     }
 
-   public void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -44,15 +44,15 @@ public class LogInController implements Initializable, ControlledScreen {
         Boolean znaleziono;
         znaleziono = Server.getInstance().logIn(login1.getText(), haslo1.getText());
         System.out.println(znaleziono);
-        if (znaleziono == true) {
+        if (znaleziono) {
             myController.setScreen(Main.screen5ID);
             //jak się zalogują mają ten sam panel
-//            if(Server.getInstance().userType("UCZESTNIK",Server.getUserInstance().getId()))
-//            {myController.setScreen(Main.screen5ID);}
-//            else if(Server.getInstance().userType("ORGANIZATOR",Server.getUserInstance().getId()))
-//            {  myController.setScreen(Main.screen5ID);}
-//              else if(Server.getInstance().userType("PRELEGENT",Server.getUserInstance().getId()))
-//            { myController.setScreen(Main.screen5ID);}
+            if(Server.getInstance().userType("UCZESTNIK",Server.getUserInstance().getId()))
+            {myController.setScreen(Main.screen5ID);}
+           else if(Server.getInstance().userType("ORGANIZATOR",Server.getUserInstance().getId()))
+            {  myController.setScreen(Main.screen14ID);}
+              else if(Server.getInstance().userType("PRELEGENT",Server.getUserInstance().getId()))
+            { myController.setScreen(Main.screen5ID);}
         } else {
             System.out.println("Nie wchodzimy");
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,

@@ -62,13 +62,9 @@ public class MainController implements Initializable, ControlledScreen {
         opisKonf.setText("Wszystko co chcesz dowiedzieć sie o konferencjach....\nWszystko co chcesz dowiedzieć sie o konferencjach....\nWszystko co chcesz dowiedzieć sie o konferencjach....");
         ObservableList<Conference> dane = FXCollections.observableArrayList();
 
-
-        int i = 1;
         if (Server.getInstance().getConferenceInfo())
             for (Conference x : Server.getConferenceInstance().getConferences()) {
                 dane.add(new Conference(x.getId(), x.getData(), x.getName(), x.getDescription()));
-
-
             }
 
         // Ustawienie danych dla tabeli
@@ -107,37 +103,30 @@ public class MainController implements Initializable, ControlledScreen {
                             if (Server.getInstance().getConferenceInfo())
 
                                 if (empty) {
-                                setGraphic(null);
-                                setText(null);
-                            } else {
-                                int selectdIndex = getTableRow().getIndex();
-                                btnEdit.setOnAction(e -> {
-                                    System.out.println("akcja!!" + selectdIndex);
-                                    opisKonf.setText(Server.getConferenceInstance().getConferences().get(selectdIndex).getDescription());
-                                    tematKonf.setText(Server.getConferenceInstance().getConferences().get(selectdIndex).getName());
+                                    setGraphic(null);
+                                    setText(null);
+                                } else {
+                                    int selectdIndex = getTableRow().getIndex();
+                                    btnEdit.setOnAction(e -> {
+                                        System.out.println("akcja!!" + selectdIndex);
+                                        opisKonf.setText(Server.getConferenceInstance().getConferences().get(selectdIndex).getDescription());
+                                        tematKonf.setText(Server.getConferenceInstance().getConferences().get(selectdIndex).getName());
+                                    });
 
-                                    // System.out.println(Server.getConferenceInstance().getConferences().get(1).toString());
-                                   // System.out.println(Server.getConferenceInstance().getConferences().get(1).toString());
-                                   // System.out.println(Server.getConferenceInstance().getConferences().get(2).toString());
-                                  //  System.out.println(Server.getConferenceInstance().getConferences().get(3).toString());
+                                    btnEdit.setStyle("-fx-background-color: transparent;");
+                                    ImageView iv = new ImageView();
+                                    iv.setImage(imgEdit);
+                                    iv.setPreserveRatio(true);
+                                    iv.setSmooth(true);
+                                    iv.setCache(true);
+                                    btnEdit.setGraphic(iv);
 
-                                });
-
-                                btnEdit.setStyle("-fx-background-color: transparent;");
-                                ImageView iv = new ImageView();
-                                iv.setImage(imgEdit);
-                                iv.setPreserveRatio(true);
-                                iv.setSmooth(true);
-                                iv.setCache(true);
-                                btnEdit.setGraphic(iv);
-
-                                setGraphic(btnEdit);
-                                setAlignment(Pos.CENTER);
-                                setText(null);
-                            }
+                                    setGraphic(btnEdit);
+                                    setAlignment(Pos.CENTER);
+                                    setText(null);
+                                }
                         }
 
-//                        }
                     };
                     return cell;
                 }
@@ -176,9 +165,7 @@ public class MainController implements Initializable, ControlledScreen {
             document.close();
 
 
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
+        } catch (DocumentException | FileNotFoundException e) {
             e.printStackTrace();
         }
 

@@ -14,45 +14,43 @@ import model.Server;
 
 public class Main extends Application {
     public static String screen1ID = "main";
-    public static String screen1File = "/view/Homepage.fxml";
+    private static String screen1File = "/view/Homepage.fxml";
     public static String screen2ID = "screen2";
-    public static String screen2File = "/view/Registration.fxml";
+    private static String screen2File = "/view/Registration.fxml";
     public static String screen3ID = "screen3";
-    public static String screen3File = "/view/LogIn.fxml";
+    private static String screen3File = "/view/LogIn.fxml";
     public static String screen4ID = "screen4";
-    public static String screen4File = "/view/MyAccount.fxml";
+    private static String screen4File = "/view/MyAccount.fxml";
     public static String screen5ID = "screen5";
-    public static String screen5File = "/view/HomepageUP.fxml";
+    private static String screen5File = "/view/HomepageUP.fxml";
     public static String screen6ID = "screen6";
-    public static String screen6File = "/view/OrganiserMyAccount.fxml";
+    private static String screen6File = "/view/OrganiserMyAccount.fxml";
     public static String screen7ID = "screen7";
-    public static String screen7File = "/view/EditAccount.fxml";
-
+    private static String screen7File = "/view/EditAccount.fxml";
     public static String screen8ID = "screen8";
-    public static String screen8File = "/view/MyApplication.fxml";
-
-  //  public static String screen9ID = "screen9";
-   // public static String screen9File = "";
-
+    private static String screen8File = "/view/MyApplication.fxml";
+    public static String screen9ID = "screen9";
+    private static String screen9File = "/view/NewConference.fxml";
     public static String screen10ID = "screen10";
-    public static String screen10File = "/view/AssessmentConference.fxml";
-
+    private static String screen10File = "/view/AssessmentConference.fxml";
     public static String screen11ID = "screen11";
-    public static String screen11File = "/view/MyConference.fxml";
-
+    private static String screen11File = "/view/MyConference.fxml";
     public static String screen12ID = "screen12";
-    public static String screen12File = "/view/PaymentUser.fxml";
-
+    private static String screen12File = "/view/PaymentUser.fxml";
     public static String screen13ID = "screen13";
-    public static String screen13File = "/view/SearchConference.fxml";
+    private static String screen13File = "/view/SearchConference.fxml";
+    public static String screen14ID = "screen14";
+    private static String screen14File = "/view/HomepageOrganizator.fxml";
+    public static String screen15ID = "screen15";
+    private static String screen15File = "/view/AddApplication.fxml";
+    public static String screen16ID = "screen16";
+    private static String screen16File = "/view/MyAccountPrelegent.fxml";
+
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-
-//            primaryStage.setScene(new Scene(parent, 900,600));
-
             ScreensController mainContainer = new ScreensController();
             mainContainer.loadScreen(Main.screen1ID, Main.screen1File);
             mainContainer.loadScreen(Main.screen2ID, Main.screen2File);
@@ -61,13 +59,15 @@ public class Main extends Application {
             mainContainer.loadScreen(Main.screen5ID, Main.screen5File);
             mainContainer.loadScreen(Main.screen6ID, Main.screen6File);
             mainContainer.loadScreen(Main.screen7ID, Main.screen7File);
-
             mainContainer.loadScreen(Main.screen8ID, Main.screen8File);
-           // mainContainer.loadScreen(Main.screen9ID, Main.screen9File);
+            mainContainer.loadScreen(Main.screen9ID, Main.screen9File);
             mainContainer.loadScreen(Main.screen10ID, Main.screen10File);
             mainContainer.loadScreen(Main.screen11ID, Main.screen11File);
             mainContainer.loadScreen(Main.screen12ID, Main.screen12File);
             mainContainer.loadScreen(Main.screen13ID, Main.screen13File);
+            mainContainer.loadScreen(Main.screen14ID, Main.screen14File);
+            mainContainer.loadScreen(Main.screen15ID, Main.screen15File);
+            mainContainer.loadScreen(Main.screen16ID, Main.screen16File);
 
             mainContainer.setScreen(Main.screen1ID);
 
@@ -95,15 +95,13 @@ public class Main extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
 
     @Override
     public void init() throws Exception {
         super.init();
-//
+
         if (Server.getInstance().open()) {
 
         } else {

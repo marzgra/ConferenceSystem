@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrganiserMyAccountController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MyAccountPrelegentController">
     <children>
         <Pane prefHeight="150.0" prefWidth="900.0" style="-fx-background-color: #071b3a;">
             <children>
@@ -90,16 +90,12 @@
                         <Image url="@../images/konto-Windows.png"/>
                     </image>
                 </ImageView>
-                <Button layoutX="405.0" layoutY="106.0" mnemonicParsing="false" onAction="#onClickWyswietl"
-                        prefHeight="44.0" prefWidth="130.0" style="-fx-background-color: #96846d;"
-                        text="Wyświetl moje dane"/>
-                <Button layoutX="429.0" layoutY="400.0" mnemonicParsing="false" onAction="#onZgloszenia"
-                        prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Zgłoszenia "/>
-                <Button layoutX="543.0" layoutY="400.0" mnemonicParsing="false" onAction="#onUczestnicy"
-                        prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Uczestnicy "/>
-                <Button layoutX="657.0" layoutY="400.0" mnemonicParsing="false" onAction="#nowaKonferencja"
-                        prefHeight="44.0" prefWidth="115.0" style="-fx-background-color: #96846d;"
-                        text="Nowa konferencja"/>
+                <Button fx:id="wyswietlDane" layoutX="405.0" layoutY="106.0" mnemonicParsing="false"
+                        onAction="#onClickWyswietl" prefHeight="44.0" prefWidth="130.0"
+                        style="-fx-background-color: #96846d;" text="Wyświetl moje dane"/>
+                <Button fx:id="dodaj" layoutX="429.0" layoutY="401.0" mnemonicParsing="false"
+                        onAction="#dodajZgloszenie" prefHeight="35.0" prefWidth="220.0"
+                        style="-fx-background-color: #96846d;" text="Dodaj zgłoszenie"/>
             </children>
         </Pane>
     </children>

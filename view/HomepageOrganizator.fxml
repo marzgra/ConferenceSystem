@@ -23,7 +23,7 @@
             <children>
 
                 <Button layoutX="374.0" layoutY="105.0" mnemonicParsing="false" style="-fx-background-color: #c1b4a2;"
-                        text="Szukaj"/>
+                        text="Szukaj" onAction="#onClickSzukaj"/>
                 <Label layoutX="43.0" layoutY="15.0" opacity="0.99" prefHeight="77.0" prefWidth="391.0"
                        text="KONFERENCJE" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
                     <font>

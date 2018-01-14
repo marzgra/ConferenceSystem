@@ -69,33 +69,33 @@ public class AssessmentConferenceController implements Initializable, Controlled
     }
 
     public void onClickBack(ActionEvent actionEvent) {
-        myController.setScreen(Main.screen1ID);
+        myController.setScreen(Main.screen5ID);
     }
 
     public void przeslijKonferencja(ActionEvent actionEvent) {
 
-        Conference conf =assessmentTable.getSelectionModel().getSelectedItem();
-        int ocena=Integer.parseInt((ocenaK.getValue().toString()));
+        Conference conf = assessmentTable.getSelectionModel().getSelectedItem();
+        int ocena = Integer.parseInt((ocenaK.getValue().toString()));
 
-        Server.getInstance().addConferenceMark(conf.getId(),Server.getUserInstance().getId(),ocena);
+        Server.getInstance().addConferenceMark(conf.getId(), Server.getUserInstance().getId(), ocena);
     }
 
     public void przeslijMiejsce(ActionEvent actionEvent) {
-        Conference conf =assessmentTable.getSelectionModel().getSelectedItem();
-        int ocena=Integer.parseInt(ocenaM.getValue().toString());
+        Conference conf = assessmentTable.getSelectionModel().getSelectedItem();
+        int ocena = Integer.parseInt(ocenaM.getValue().toString());
 
         System.out.println(ocena);
-        Server.getInstance().addLocationMark(conf.getName(),Server.getUserInstance().getId(),ocena);
+        Server.getInstance().addLocationMark(conf.getName(), Server.getUserInstance().getId(), ocena);
 
     }
 
     public void przeslijPrelegent(ActionEvent actionEvent) {
 
-        String imieP=imie.getText();
-                String nazwiskoP=nazwisko.getText();
-        Conference conf =assessmentTable.getSelectionModel().getSelectedItem();
-        int ocena=Integer.parseInt(ocenaP.getValue().toString());
+        String imieP = imie.getText();
+        String nazwiskoP = nazwisko.getText();
+        Conference conf = assessmentTable.getSelectionModel().getSelectedItem();
+        int ocena = Integer.parseInt(ocenaP.getValue().toString());
         System.out.println(ocenaP.getValue());
-        Server.getInstance().addLecturerMark(imieP,nazwiskoP,Server.getUserInstance().getId(),ocena);
+        Server.getInstance().addLecturerMark(imieP, nazwiskoP, Server.getUserInstance().getId(), ocena);
     }
 }
