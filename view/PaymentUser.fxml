@@ -38,7 +38,7 @@
                 </ImageView>
             <Button layoutX="618.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClickBack" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #b8bce1;" text="POWRÓT" />
             <Button layoutX="445.0" layoutY="115.0" mnemonicParsing="false" onAction="#pokaz" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #b8bce1;" text="POKAŻ" />
-            <Text layoutX="31.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kliknij POKAŻ by dowiedzieć się ile uczestników zapisało się na twoje konferencje i czy zapłacili konieczne należności, jeśli kwota zgadza się z wymaganiem zatwierdź klikając przycisk." wrappingWidth="389.197265625">
+            <Text layoutX="31.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kliknij POKAŻ aby dowiedzieć się ilu uczestników zapisało się na twoje konferencje i czy zapłacili konieczne należności. Jeśli kwota zgadza się z wymaganiem, zatwierdź klikając przycisk." wrappingWidth="389.197265625">
                <font>
                   <Font name="SansSerif Regular" size="18.0" />
                </font>

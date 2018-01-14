@@ -69,7 +69,7 @@ public class AssessmentConferenceController implements Initializable, Controlled
     }
 
     public void onClickBack(ActionEvent actionEvent) {
-        myController.setScreen(Main.screen1ID);
+        myController.setScreen(Main.screen5ID);
     }
 
     public void przeslijKonferencja(ActionEvent actionEvent) {

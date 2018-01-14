@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Conference;
 import model.Server;
+import model.TypUzytkownika;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -58,12 +59,13 @@ public class SearchConferenceController implements Initializable, ControlledScre
 
 
     public void onClickBack(ActionEvent actionEvent) {
-        if(Server.getUserInstance().getId()>0)
+        if (Server.getUserInstance() == null) {
+            // uzytkownik niezalogowany
+            myController.setScreen(Main.screen1ID);
+        }else{
+            // uzytkownik zalogowany
             myController.setScreen(Main.screen5ID);
-        else
-        myController.setScreen(Main.screen1ID);
-
-        //odac zalogowani niezalogowani
+        }
     }
 
     public void wyszukajPrelegenta(ActionEvent actionEvent) {
@@ -98,7 +100,7 @@ public class SearchConferenceController implements Initializable, ControlledScre
         ObservableList<Conference> dane = FXCollections.observableArrayList();
 
         LocalDate dataRozpoczecia = dataOd.getValue();
-        LocalDate datazakonczenia=dataDo.getValue();
+        LocalDate datazakonczenia = dataDo.getValue();
 
         System.out.println(dataRozpoczecia);
         System.out.println(datazakonczenia);

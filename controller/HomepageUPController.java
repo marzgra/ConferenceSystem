@@ -64,7 +64,7 @@ public class HomepageUPController implements Initializable, ControlledScreen {
         } else if (Server.getInstance().userType("ORGANIZATOR", Server.getUserInstance().getId())) {
             myController.setScreen(Main.screen6ID);
         } else if (Server.getInstance().userType("PRELEGENT", Server.getUserInstance().getId())) {
-            myController.setScreen(Main.screen4ID);
+            myController.setScreen(Main.screen16ID);
         }
 
     }

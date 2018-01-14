@@ -1,19 +1,21 @@
 package controller;
 
-
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.fxml.Initializable;
 import model.Server;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class MyAccountController implements Initializable, ControlledScreen {
+public class MyAccountPrelegentController implements Initializable, ControlledScreen{
+
+    @FXML
+    public Button dodaj;
     @FXML
     private TextField nameText;
     @FXML
@@ -32,15 +34,16 @@ public class MyAccountController implements Initializable, ControlledScreen {
     private Button mojeKonferencje;
 
     ScreensController myController;
-
-    public void setScreenParent(ScreensController screenParent) {
-        myController = screenParent;
+    @Override
+    public void setScreenParent(ScreensController screenPage) {
+        myController = screenPage;
     }
 
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
     }
+
 
     public void onClickUsunKonto(ActionEvent actionEvent) {
         Server.getInstance().deleteUsesr();
@@ -53,13 +56,7 @@ public class MyAccountController implements Initializable, ControlledScreen {
     }
 
     public void onClickMojeKonferencje(ActionEvent actionEvent) {
-        if (Server.getInstance().userType("UCZESTNIK", Server.getUserInstance().getId())) {
-            myController.setScreen(Main.screen11ID);
-        } else if (Server.getInstance().userType("PRELEGENT", Server.getUserInstance().getId())) {
             myController.setScreen(Main.screen8ID);
-        }
-
-
     }
 
     public void onClickPowrot(ActionEvent actionEvent) {
@@ -74,14 +71,8 @@ public class MyAccountController implements Initializable, ControlledScreen {
         emailText.setText(" ");
     }
 
-
     public void onClickWyswietl(ActionEvent actionEvent) {
-        if (Server.getInstance().userType("UCZESTNIK", Server.getUserInstance().getId())) {
-            mojeKonferencje.setText("Moje konferencje");
-        } else if (Server.getInstance().userType("PRELEGENT", Server.getUserInstance().getId())) {
-            mojeKonferencje.setText("Moje zgloszenia");
-        }
-
+        mojeKonferencje.setText("Moje zgloszenia");
 
         nameText.setText(Server.getUserInstance().getImie());
         surnameText.setText(Server.getUserInstance().getNazwisko());
@@ -90,5 +81,9 @@ public class MyAccountController implements Initializable, ControlledScreen {
         passwordText.setText(Server.getUserInstance().getHaslo());
         personText.setText(Server.getUserInstance().getImie());
         emailText.setText(Server.getUserInstance().getEmail());
+    }
+
+    public void dodajZgloszenie(ActionEvent actionEvent) {
+        myController.setScreen(Main.screen15ID);
     }
 }

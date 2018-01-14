@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrganiserMyAccountController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrganiserMyAccountController">
     <children>
         <Pane prefHeight="150.0" prefWidth="900.0" style="-fx-background-color: #071b3a;">
             <children>
@@ -74,8 +74,9 @@
                     </image>
                 </ImageView>
                 <Button layoutX="405.0" layoutY="106.0" mnemonicParsing="false" onAction="#onClickWyswietl" prefHeight="44.0" prefWidth="130.0" style="-fx-background-color: #96846d;" text="Wyświetl moje dane" />
-            <Button onAction="#onZgloszenia" layoutX="429.0" layoutY="400.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Zgłoszenia " />
-            <Button onAction="#onUczestnicy" layoutX="543.0" layoutY="400.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Uczestnicy " />
+            <Button layoutX="429.0" layoutY="400.0" mnemonicParsing="false" onAction="#onZgloszenia" prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Zgłoszenia " />
+            <Button layoutX="543.0" layoutY="400.0" mnemonicParsing="false" onAction="#onUczestnicy" prefHeight="44.0" prefWidth="106.0" style="-fx-background-color: #96846d;" text="Uczestnicy " />
+            <Button layoutX="657.0" layoutY="400.0" mnemonicParsing="false" onAction="#nowaKonferencja" prefHeight="44.0" prefWidth="115.0" style="-fx-background-color: #96846d;" text="Nowa konferencja" />
             </children>
         </Pane>
     </children>

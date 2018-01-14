@@ -35,6 +35,7 @@ public class HomepageOrganizatorController implements Initializable, ControlledS
     }
 
     public void onClickDodajKonferencje(ActionEvent actionEvent) {
+        myController.setScreen(Main.screen9ID);
     }
 
     @Override
