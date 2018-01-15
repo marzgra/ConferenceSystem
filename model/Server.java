@@ -145,7 +145,15 @@ public class Server {
     private static final String POBIERZ_WYKLADY = "SELECT NAZWA FROM WYKLAD WHERE ID_KONFERENCJA IN "
             + "(SELECT ID_KONFERENCJA FROM KONFERENCJA WHERE NAZWA = ?) AND DATA_ROZPOCZECIA > CURRENT_DATE";
 
+    private static final String POBIERZ_ZGLOSZENIA = "select KONFERENCJA.nazwa, WYKLAD.NAZWA_WYKLADU, ZGLOSZENIE.TEMAT "
+    + "from zgloszenie NATURAL JOIN WYKLAD join KONFERENCJA on WYKLAD.ID_KONFERENCJA = KONFERENCJA.ID_KONFERENCJA "
+    + "where KONFERENCJA.ID_ORGANIZATOR = ? AND KONFERENCJA.DATA_ROZPOCZECIA > CURRENT_DATE";
 
+
+    private static final String ZATWIERDZ_ZGLOSZENIE = "UPDATE ZGLOSZENIE SET TO_PROJEKT.ZGLOSZENIE.STATUS = 1 WHERE TO_PROJEKT.ZGLOSZENIE.ID_ZGLOSZENIE = ?";
+
+
+    private static final String POBIERZ_ID_ZGLOSZENIA = "SELECT ID_ZGLOSZENIE FROM ZGLOSZENIE WHERE TEMAT = ?";
 
 
     private Connection connection;
@@ -1035,7 +1043,7 @@ public class Server {
         }
     }
 
-    public String createApplicationFilename(){
+    public String createApplicationFilename() {
         int id = getId(TABELA_ZGLOSZENIE, KOLUMNA_ID_ZGLOSZENIE) + 1;
         return "Zgloszenie" + id;
     }
@@ -1067,8 +1075,61 @@ public class Server {
 
     }
 
-
+    //todo panel dodaj wyklad dla organizatora
     public void signToConference(int idKonferencji) {
-        // todo weź udział
+        // todo weź udział = zapisz uzytkownika na wszystkie wyklady danej konferencji
+
+    }
+
+    public ArrayList<Zgloszenie> pobierzZgloszenia(int idOrganizatora){//}, int idKonferencja) {
+        ArrayList<Zgloszenie> lista = new ArrayList<>();
+        String nazwaKonf;
+        String nazwaWykl;
+        String nazwaZgloszenie;
+        try{
+            PreparedStatement statement = connection.prepareStatement(POBIERZ_ZGLOSZENIA);
+            statement.setInt(1, idOrganizatora);
+
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                nazwaKonf = resultSet.getString(1);
+                nazwaWykl = resultSet.getString(2);
+                nazwaZgloszenie = resultSet.getString(3);
+
+                lista.add(new Zgloszenie(nazwaKonf, nazwaWykl, nazwaZgloszenie));
+            }
+            return lista;
+        }catch (SQLException e){
+            System.out.println("pobierz Zgloszenia error: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public int getZgloszenieID(String nazwaZgloszenia){
+
+        try{
+            PreparedStatement statement = connection.prepareStatement(POBIERZ_ID_ZGLOSZENIA);
+            statement.setString(1, nazwaZgloszenia);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                return resultSet.getInt(1);
+            }
+            return resultSet.getInt(1);
+
+        }catch(SQLException e){
+            System.out.println("getZdlozenieID error: " + e.getMessage());
+            return -1;
+        }
+    }
+
+    public void zatwierdzZgloszenie(int idZgloszenia){
+        try{
+            PreparedStatement statement = connection.prepareStatement(ZATWIERDZ_ZGLOSZENIE);
+            statement.setInt(1, idZgloszenia);
+            statement.executeUpdate();
+
+        }catch(SQLException e){
+            System.out.println("zatwierzzgloszenie error: " + e.getMessage());
+        }
     }
 }

@@ -34,13 +34,6 @@ public class OrganiserMyAccountController implements Initializable, ControlledSc
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-//        if(Server.getInstance().userType("UCZESTNIK",Server.getUserInstance().getId()))
-//        mojeKonferencje.setText("MOJE KONFERENCJE");
-//           if(Server.getInstance().userType("ORGANIZATOR",Server.getUserInstance().getId()))
-//               mojeKonferencje.setText("MOJE KONFERENCJE");
-//     if(Server.getInstance().userType("PRELEGENT",Server.getUserInstance().getId()))
-//         mojeKonferencje.setText("MOJE ZGLOSZENIA");
-
 
     }
 
@@ -91,6 +84,14 @@ public class OrganiserMyAccountController implements Initializable, ControlledSc
 
     public void onZgloszenia(ActionEvent actionEvent) {
     // todo nowy panel z tabelą zgłoszeń - mozliwość pobrania odpowiedniego pliku i zmiany statusu (akceptacji)
+        //server pobierz liste zgloszen: nazwaKonf, nazwa wykładu, nazwa zgłoszenia
+        //dodaj button pobierz pdf, zatwierdz i odrzuć zgłoszenie
+        myController.setScreen(Main.screen17ID);
+
+
+
+
+
     }
 
     public void nowaKonferencja(ActionEvent actionEvent) {

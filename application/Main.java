@@ -39,12 +39,15 @@ public class Main extends Application {
     private static String screen12File = "/view/PaymentUser.fxml";
     public static String screen13ID = "screen13";
     private static String screen13File = "/view/SearchConference.fxml";
-    public static String screen14ID = "screen14";
-    private static String screen14File = "/view/HomepageOrganizator.fxml";
+//    public static String screen14ID = "screen14";
+//    private static String screen14File = "/view/HomepageOrganizator.fxml";
     public static String screen15ID = "screen15";
     private static String screen15File = "/view/AddApplication.fxml";
     public static String screen16ID = "screen16";
     private static String screen16File = "/view/MyAccountPrelegent.fxml";
+    public static String screen17ID = "screen17";
+    private static String screen17File = "/view/ZgloszeniaWykladow.fxml";
+
 
 
 
@@ -65,9 +68,10 @@ public class Main extends Application {
             mainContainer.loadScreen(Main.screen11ID, Main.screen11File);
             mainContainer.loadScreen(Main.screen12ID, Main.screen12File);
             mainContainer.loadScreen(Main.screen13ID, Main.screen13File);
-            mainContainer.loadScreen(Main.screen14ID, Main.screen14File);
+//            mainContainer.loadScreen(Main.screen14ID, Main.screen14File);
             mainContainer.loadScreen(Main.screen15ID, Main.screen15File);
             mainContainer.loadScreen(Main.screen16ID, Main.screen16File);
+            mainContainer.loadScreen(Main.screen17ID, Main.screen17File);
 
             mainContainer.setScreen(Main.screen1ID);
 

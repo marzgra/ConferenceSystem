@@ -50,7 +50,7 @@ public class LogInController implements Initializable, ControlledScreen {
             if(Server.getInstance().userType("UCZESTNIK",Server.getUserInstance().getId()))
             {myController.setScreen(Main.screen5ID);}
            else if(Server.getInstance().userType("ORGANIZATOR",Server.getUserInstance().getId()))
-            {  myController.setScreen(Main.screen14ID);}
+            {  myController.setScreen(Main.screen5ID);}
               else if(Server.getInstance().userType("PRELEGENT",Server.getUserInstance().getId()))
             { myController.setScreen(Main.screen5ID);}
         } else {

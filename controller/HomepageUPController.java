@@ -57,7 +57,6 @@ public class HomepageUPController implements Initializable, ControlledScreen {
 
     public void onClickWyloguj(ActionEvent actionEvent) {
         myController.setScreen(Main.screen1ID);
-
     }
 
     public void onClickMojeKonto(ActionEvent actionEvent) {
@@ -106,7 +105,7 @@ public class HomepageUPController implements Initializable, ControlledScreen {
 
     }
 
-     // todo oddzielny homepage dla uzytkownika z tabelą select * from konferencje where miejscowosc in (select miejscowosc from uzytkownik where login = ?);
+
 
     private Callback<TableColumn<Conference, Boolean>, TableCell<Conference, Boolean>> cellFactory =
             new Callback<TableColumn<Conference, Boolean>, TableCell<Conference, Boolean>>() {
@@ -151,7 +150,6 @@ public class HomepageUPController implements Initializable, ControlledScreen {
                 }
             };
 
-    // todo jak ma wyglądać "weź udział" w konferecji? zapis na konferencję, czy na wykaldy?
     private Callback<TableColumn<Conference, Boolean>, TableCell<Conference, Boolean>> wezUdzialFactory =
             new Callback<TableColumn<Conference, Boolean>, TableCell<Conference, Boolean>>() {
                 @Override
@@ -163,23 +161,27 @@ public class HomepageUPController implements Initializable, ControlledScreen {
                         @Override
                         protected void updateItem(Boolean item, boolean empty) {
                             super.updateItem(item, empty);
-                            button.setOnAction(e -> {
-                                int id = getTableRow().getIndex();
-                                int IDKonferencji = Server.getConferenceInstance().getConferences().get(id).getId();
-                                Server.getInstance().signToConference(IDKonferencji);
-                            });
 
-                            ImageView iv = new ImageView();
-                            iv.setImage(imgEdit);
-                            iv.setPreserveRatio(true);
-                            iv.setSmooth(true);
-                            iv.setCache(true);
-                            button.setGraphic(iv);
+                            if(Server.getInstance().userType("UCZESTNIK", Server.getUserInstance().getId())){
+                                button.setOnAction(e -> {
+                                    int id = getTableRow().getIndex();
+                                    int IDKonferencji = Server.getConferenceInstance().getConferences().get(id).getId();
+                                    Server.getInstance().signToConference(IDKonferencji);
+                                });
 
-                            setGraphic(button);
-                            setAlignment(Pos.CENTER);
-                            setText(null);
+                                ImageView iv = new ImageView();
+                                iv.setImage(imgEdit);
+                                iv.setPreserveRatio(true);
+                                iv.setSmooth(true);
+                                iv.setCache(true);
+                                button.setGraphic(iv);
 
+                                setGraphic(button);
+                                setAlignment(Pos.CENTER);
+                                setText(null);
+                            }else{
+                                button.setVisible(false);
+                            }
                         }
                     };
                     return cell;

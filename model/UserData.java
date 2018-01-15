@@ -53,14 +53,11 @@ public class UserData {
         this.kwota = kwota;
         this.nazwaKonferencji = nazwaKonferencji;
         this.login = login;
-        this.id=id;
-
+        this.id = id;
     }
-
 
     public UserData(String nazwaKonferencji, String temat, int status) {
         this.status = status;
-
         this.nazwaKonferencji = nazwaKonferencji;
         this.temat = temat;
     }
@@ -71,6 +68,8 @@ public class UserData {
         this.nazwaKonferencji = nazwaKonferencji;
         this.miejsce = miejsce;
     }
+
+
 
     public int getStatus() {
         return status;
@@ -113,9 +112,6 @@ public class UserData {
     }
 
     public UserData(List<UserData> userData) {
-
         this.userData = userData;
-
-
     }
 }

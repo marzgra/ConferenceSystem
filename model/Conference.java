@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Conference {
-private  int id;
+    private int id;
     private Date data;
     private String description;
     private String name;
@@ -22,18 +22,20 @@ private  int id;
         this.description = description;
         this.name = name;
 
-        this.id=id;
+        this.id = id;
 
     }
-    public Conference( int id,  String name,String description) {
+
+    public Conference(int id, String name, String description) {
         this.description = description;
         this.name = name;
-        this.id=id;
+        this.id = id;
 
     }
+
     public Conference(List<Conference> conferences) {
 
-        this.conferences=conferences;
+        this.conferences = conferences;
 
     }
 
